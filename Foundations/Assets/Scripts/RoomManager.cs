@@ -1,12 +1,20 @@
-﻿using System.Collections;
+﻿/* 
+ * Room Manager Scrypt Version  :   1.0
+ * Contributors                 :   Stephen W
+ * Last Edit                    :   25/10/19 16:27
+ * ChangeLog                    :   No Changes
+ * This code controlls the creation and spawning of new rooms
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-
+    //Creates a List of all Structures Created
     public List<RoomStruct> Rooms = new List<RoomStruct>();
 
+    //Intigers to count count the number of references of each type of room
     private int PCRoomNum = 0;
     private int LoungeNum = 0;
     private int MeetingRoomNum = 0;
@@ -14,6 +22,7 @@ public class RoomManager : MonoBehaviour
     private int AudioLabNum = 0;
     private int WorkshopNum = 0;
 
+    //instanciates all prefabs in the editor
     public GameObject PCRoomPrefab;
     public GameObject LoungePrefab;
     public GameObject MeetingRoomPrefab;
@@ -21,6 +30,7 @@ public class RoomManager : MonoBehaviour
     public GameObject AudioLabPrefab;
     public GameObject WorkshopPrefab;
 
+    //creates a new instance of the PCROOM, spawns it, adds it to the list, then increments the room count
     public void AddPCRoom() 
     {
         var PCRoom = new RoomStruct();
@@ -34,6 +44,7 @@ public class RoomManager : MonoBehaviour
         Debug.Log("Added PC Room");
     }
 
+    //creates a new instance of the LOUNGE, spawns it, adds it to the list, then increments the room count
     public void AddLounge() 
     {
         var Lounge = new RoomStruct();
@@ -46,6 +57,8 @@ public class RoomManager : MonoBehaviour
         LoungeNum++;
         Debug.Log("Added Lounge");
     }
+
+    //creates a new instance of the MEETINGROOM, spawns it, adds it to the list, then increments the room count
     public void AddMeetingRoom() 
     {
         var MeetingRoom = new RoomStruct();
@@ -59,6 +72,7 @@ public class RoomManager : MonoBehaviour
         Debug.Log("Added Meeting Room");
     }
 
+    //creates a new instance of the GREENSCREEN, spawns it, adds it to the list, then increments the room count
     public void AddGreenScreen() 
     {
         var GreenScreen = new RoomStruct();
@@ -72,6 +86,7 @@ public class RoomManager : MonoBehaviour
         Debug.Log("Added Green Screen");
     }
 
+    //creates a new instance of the AUDIOLAB, spawns it, adds it to the list, then increments the room count
     public void AddAudioLab() 
     {
         var AudioLab = new RoomStruct();
@@ -85,6 +100,7 @@ public class RoomManager : MonoBehaviour
         Debug.Log("Added Audio Lab");
     }
 
+    //creates a new instance of the WORKSHOP, spawns it, adds it to the list, then increments the room count
     public void AddWorkshop() 
     {
         var Workshop = new RoomStruct();
@@ -102,10 +118,5 @@ public class RoomManager : MonoBehaviour
     {
         int i = Rooms.Count;
         Debug.Log("the list contains " + i + " Members");
-    }
-
-    private void CreateRoom(Vector3 pos)
-    {
-        
     }
 }
