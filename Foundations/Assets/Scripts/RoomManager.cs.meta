@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 206366b9c899bb94aa0fd6473b2659f8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - PCRoomPrefab: {fileID: 1340182179552740076, guid: ee817829df14099418403512e260154f,
+      type: 3}
+  - LoungePrefab: {fileID: 1502824280403808968, guid: df15b6f2e765aa249bc2476de578ed60,
+      type: 3}
+  - MeetingRoomPrefab: {fileID: 3718183099314536629, guid: f4f80e9e15bd97c4c9a274bed9a355b5,
+      type: 3}
+  - GreenScreenPrefab: {fileID: 2345735066997740105, guid: 399bea0d4b5c2ff4abb6e9c44f16efea,
+      type: 3}
+  - AudioLabPrefab: {fileID: 1131233234154908226, guid: a55f3315827f9684ba01e0981384d0c6,
+      type: 3}
+  - WorkshopPrefab: {fileID: 2034553332717869726, guid: cbc6431a985847c429b8778608f7a183,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
