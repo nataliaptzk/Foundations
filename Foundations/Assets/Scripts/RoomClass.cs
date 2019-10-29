@@ -1,38 +1,37 @@
-﻿using System.Collections;
+﻿/* 
+ * Room Structure Scrypt Version:   1.0
+ * Contributors                 :   Stephen W
+ * Last Edit                    :   25/10/19 16:27
+ * ChangeLog                    :   No Changes
+ * This code creates instances of the room structure
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class GridObject : MonoBehaviour
+public enum RoomType
+{
+    empty,
+    buildable,
+    pc,
+    greenscreen,
+    lounge,
+    meeting,
+    audio,
+    workshop
+}
+
+public class RoomClass : MonoBehaviour
 {
     public RoomType type;
     public int max_occupants;
     public int current_occupants;
     public Sprite sprite;
-    private SpriteRenderer sprite_renderer;
-    public int grid_ID;
-    public GameObject grid_ui;
-
-    public void SetComponents()
-    {
-        sprite = null;
-        sprite_renderer = GetComponent<SpriteRenderer>();
-    }
-    public void OnMouseDown()
-    {
-        if (!EventSystem.current.IsPointerOverGameObject())
-        {
-            ObjectPooler OP = grid_ui.GetComponent<ObjectPooler>();
-            GameObject UI = OP.GetPooledObject();
-            UI.transform.SetParent(grid_ui.transform, false);
-            UI.transform.position = transform.position;
-            UI.SetActive(true);
-        }
-    }
 
     public void SetRoomValues()
     {
-        switch (type)
+        switch(type)
         {
             case RoomType.empty:
                 sprite = null;
@@ -50,13 +49,12 @@ public class GridObject : MonoBehaviour
                 current_occupants = 0;
                 break;
         }
-        sprite_renderer.sprite = sprite;
     }
 
     public Sprite SetSprite(RoomType type)
     {
         Sprite sprite = null;
-        switch (type)
+        switch(type)
         {
             case RoomType.pc:
                 sprite = null;

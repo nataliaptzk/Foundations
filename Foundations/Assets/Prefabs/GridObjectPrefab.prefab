@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1485276208995091906}
   - component: {fileID: 3995911346511695298}
   m_Layer: 0
-  m_Name: GridEmpty
+  m_Name: GridObjectPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: dbff026e2152e904aa9c3e3d5088d395, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -94,9 +94,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cbbad20d586c1746b6d1c24b6df0c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: 0, y: 0, z: 0}
-  grid_x: 0
-  grid_y: 0
+  type: 0
+  max_occupants: 0
+  current_occupants: 0
+  sprite: {fileID: 0}
+  grid_ID: 0
+  grid_ui: {fileID: 0}
 --- !u!61 &3995911346511695298
 BoxCollider2D:
   m_ObjectHideFlags: 0
