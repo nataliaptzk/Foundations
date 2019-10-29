@@ -19,9 +19,9 @@ public class IncomeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        money.text = incomeInventoryAmount + "";
+        money.text = (int)incomeInventoryAmount + "";
         incomeInventoryAmount += incomeInventoryAmountPerSecond * Time.deltaTime;
         Income.addIncomeAmount(incomeInventoryAmount);
-        incomeInventoryAmount = 0f;
+        //incomeInventoryAmount = 0f;
     }
 }
