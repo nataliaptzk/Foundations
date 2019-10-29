@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Income : MonoBehaviour
+public static class Income
 {
     public static event EventHandler OnIncomeAmountChanged;
 
-    private static int incomeAmount;
+    private static float incomeAmount;
 
-    public static void addIncomeAmount(int amount)
+    public static void addIncomeAmount(float amount)
     {
         incomeAmount += amount;
         if (OnIncomeAmountChanged != null)
