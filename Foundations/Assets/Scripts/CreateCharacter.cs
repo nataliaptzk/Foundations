@@ -9,6 +9,9 @@ public class CreateCharacter : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public GameObject characterCreation;
     public PlayerManager playerManager;
+    public GridGenerator rooms;
+    public Button characterCreationButton;
+    string roomType;
     Color newColour;
     int currentIndex = 0;
     [SerializeField]
@@ -48,6 +51,8 @@ public class CreateCharacter : MonoBehaviour
         colours[6] = "#B148FA"; //purple
 
         SetColour(currentIndex);
+
+        CheckForAvaliableCharacterCreation();
     }
 
 
@@ -98,9 +103,11 @@ public class CreateCharacter : MonoBehaviour
 
     public void OnCreate()
     {
-   
-        playerManager.AddNewPlayer(colours[currentIndex], currentJob, "unknown");
+        roomType = "unknown";
+        FindAvaliableRoom();
+        playerManager.AddNewPlayer(colours[currentIndex], currentJob, roomType.ToString());
 
+        CheckForAvaliableCharacterCreation();
         characterCreation.SetActive(false);
         ResetPanel();
     }
@@ -124,5 +131,49 @@ public class CreateCharacter : MonoBehaviour
 
         currentIndex = 0;
         SetColour(0);
+    }
+
+    void FindAvaliableRoom()
+    {
+        for(int i = 0; i < rooms.builtRooms.Count; i++)
+        {
+            if(rooms.builtRooms[i].current_occupants != rooms.builtRooms[i].max_occupants)
+            {
+                roomType = rooms.builtRooms[i].type.ToString();
+                rooms.builtRooms[i].current_occupants++;
+
+                //Add player into screen here
+                // player pos rooms.builtRooms[i].transform.localPosition;
+                break;
+            }
+        }
+       
+    }
+
+    public void CheckForAvaliableCharacterCreation()
+    {
+        int spareSpaces = 0;
+        for (int i = 0; i < rooms.builtRooms.Count; i++)
+        {
+            if (rooms.builtRooms[i].current_occupants != rooms.builtRooms[i].max_occupants)
+            {
+                for(int j = rooms.builtRooms[i].current_occupants; j < rooms.builtRooms[i].max_occupants; j++ )
+                {
+                    spareSpaces++;
+                }
+            }
+        }
+
+        Debug.Log("spare Spaces" + spareSpaces);
+
+        if(spareSpaces == 0)
+        {
+            characterCreationButton.interactable = false;
+            //blank out character creation till new room added
+        }
+        else
+        {
+            characterCreationButton.interactable = true;
+        }
     }
 }
