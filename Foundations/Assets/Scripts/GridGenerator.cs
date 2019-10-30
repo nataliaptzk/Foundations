@@ -37,7 +37,7 @@ public class GridGenerator : MonoBehaviour
                 GridObject grid_script = grid_obj.GetComponent<GridObject>();
                 grid_script.grid_ID = (y * x_count) + x;
                 grid_script.grid_ui = grid_UI_obj;
-                grid_obj.transform.position = new Vector3(x * x_dist, y * y_dist, 0);
+                grid_obj.transform.position = new Vector3(transform.position.x + (x * x_dist), transform.position.y + (y * y_dist), 0);
                 grid_obj.transform.parent = transform;
                 grid_script.SetComponents();
                 grid_script.SetRoomValues();
@@ -62,6 +62,14 @@ public class GridGenerator : MonoBehaviour
             if (i + 1 < grid_list.Count - 1)
             {
                 CheckIfBuildable(i, i + 1);
+            }
+            if(i - x_count > 0)
+            {
+                CheckIfBuildable(i, i - x_count);
+            }
+            if (i + x_count < grid_list.Count)
+            {
+                CheckIfBuildable(i, i + x_count);
             }
         }
 

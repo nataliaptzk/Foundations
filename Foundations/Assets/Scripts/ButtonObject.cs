@@ -19,7 +19,6 @@ public class ButtonObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("Yeet");
         generator.AddNewRoom(type, room_num);
         parent_UI.SetActive(false);
     }
