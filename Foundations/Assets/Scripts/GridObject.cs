@@ -13,6 +13,9 @@ public class GridObject : MonoBehaviour
     public int grid_y;
     public int grid_x;
     public GameObject grid_ui;
+    public bool combined_left = false;
+    public bool combined_right = false;
+    private string sprite_name;
 
     public void SetComponents()
     {
@@ -53,7 +56,7 @@ public class GridObject : MonoBehaviour
                 current_occupants = 0;
                 break;
             case RoomType.buildable:
-                sprite = Resources.Load<Sprite>("RoomSprites/Buildable");
+                sprite = Resources.Load<Sprite>("Sprites/RoomSprites/buildable");
                 max_occupants = 0;
                 current_occupants = 0;
                 break;
@@ -72,24 +75,46 @@ public class GridObject : MonoBehaviour
         switch (type)
         {
             case RoomType.pc:
-                sprite = Resources.Load<Sprite>("RoomSprites/PCRoom");
+                sprite = Resources.Load<Sprite>("Sprites/RoomSprites/pcroom");
+                sprite_name = "pcroom";
                 break;
             case RoomType.lounge:
-                sprite = Resources.Load<Sprite>("RoomSprites/lounge");
+                sprite = Resources.Load<Sprite>("Sprites/RoomSprites/lounge");
+                sprite_name = "lounge";
                 break;
             case RoomType.greenscreen:
-                sprite = Resources.Load<Sprite>("RoomSprites/Greenscreen");
+                sprite = Resources.Load<Sprite>("Sprites/RoomSprites/greenscreen");
+                sprite_name = "greenscreen";
                 break;
             case RoomType.meeting:
-                sprite = Resources.Load<Sprite>("RoomSprites/meetingroom");
+                sprite = Resources.Load<Sprite>("Sprites/RoomSprites/meetingroom");
+                sprite_name = "meetingroom";
                 break;
             case RoomType.workshop:
-                sprite = Resources.Load<Sprite>("RoomSprites/workshop");
+                sprite = Resources.Load<Sprite>("Sprites/RoomSprites/workshop");
+                sprite_name = "workshop";
                 break;
             case RoomType.audio:
-                sprite = Resources.Load<Sprite>("RoomSprites/audio");
+                sprite = Resources.Load<Sprite>("Sprites/RoomSprites/audio");
+                sprite_name = "audio";
                 break;
         }
         return sprite;
+    }
+
+    public void SetCombinedRoom(bool side)
+    {
+        Sprite sprite = null;
+        if(side)
+        {
+            sprite = Resources.Load<Sprite>("Sprites/RoomSprites/" + sprite_name + "right");
+            combined_left = true;
+        }
+        else
+        {
+            sprite = Resources.Load<Sprite>("Sprites/RoomSprites/" + sprite_name + "left");
+            combined_right = true;
+        }
+        sprite_renderer.sprite = sprite;
     }
 }

@@ -16,6 +16,8 @@ public class GridGenerator : MonoBehaviour
     public ObjectPooler OP;
     public GameObject grid_UI_obj;
     public GameObject room_prefab;
+    private float tick_rate = 0.1f; //used so that some functions arn't called every single frame
+    private float current_tick = 0.0f;
 
     void Start()
     {
@@ -24,9 +26,15 @@ public class GridGenerator : MonoBehaviour
 
     private void Update()
     {
-        if(grid_list != null)
+        current_tick += 1 * Time.deltaTime;
+        if(current_tick > tick_rate)
         {
-            CheckEmpty();
+            if (grid_list != null)
+            {
+                CheckEmpty();
+                CheckDoubleRooms();
+            }
+            current_tick = 0.0f;
         }
     }
 
@@ -96,6 +104,37 @@ public class GridGenerator : MonoBehaviour
             {
                 obj1.type = RoomType.buildable;
                 obj1.SetRoomValues();
+            }
+        }
+    }
+
+    public void CheckDoubleRooms()
+    {
+        for(int y = 0; y < y_count; y++)
+        {
+            for(int x = 0; x < x_count; x++)
+            {
+                GridObject obj = grid_list[y][x].GetComponent<GridObject>();
+                if(obj.combined_left == true || obj.combined_right == true || obj.type == RoomType.empty || obj.type == RoomType.buildable)
+                {
+                    continue;
+                }
+                if(x > 0)
+                {
+                    GridObject checked_obj = grid_list[y][x - 1].GetComponent<GridObject>();
+                    if (checked_obj.type == obj.type && checked_obj.combined_left == false)
+                    {
+                        obj.SetCombinedRoom(true);
+                    }
+                }
+                if(x < x_count - 1)
+                {
+                    GridObject checked_obj = grid_list[y][x + 1].GetComponent<GridObject>();
+                    if (checked_obj.type == obj.type && checked_obj.combined_right == false)
+                    {
+                        obj.SetCombinedRoom(false);
+                    }
+                }
             }
         }
     }
