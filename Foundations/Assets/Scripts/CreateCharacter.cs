@@ -8,13 +8,16 @@ public class CreateCharacter : MonoBehaviour
     private string[] colours;
     public SpriteRenderer spriteRenderer;
     public GameObject characterCreation;
+    public PlayerManager playerManager;
     Color newColour;
     int currentIndex = 0;
     [SerializeField]
     Jobs currentJob = 0;
     public Dropdown jobDropdown;
+    [SerializeField]
+    List<Player> playerList;
 
-    enum Jobs
+    public enum Jobs
     {
         programmer,
         gameDesigner,
@@ -27,9 +30,13 @@ public class CreateCharacter : MonoBehaviour
         engineer,
         architect
     }
+
+  
     // Start is called before the first frame update
     void Start()
     {
+        //playerList = new List<Player>();
+
         colours = new string[7];
 
         colours[0] = "#FFFFFF"; //white
@@ -91,17 +98,31 @@ public class CreateCharacter : MonoBehaviour
 
     public void OnCreate()
     {
-        //need to add player coming in to scene and being saved
+   
+        playerManager.AddNewPlayer(colours[currentIndex], currentJob, "unknown");
+
         characterCreation.SetActive(false);
+        ResetPanel();
     }
 
     public void OnClose()
     {
         characterCreation.SetActive(false);
+        ResetPanel();
+        
     }
 
     public void OpenPanel()
     {
         characterCreation.SetActive(true);
+    }
+
+    void ResetPanel()
+    {
+        jobDropdown.value = 0;
+        currentJob = (Jobs)0;
+
+        currentIndex = 0;
+        SetColour(0);
     }
 }
