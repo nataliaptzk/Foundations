@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GridGenerator : MonoBehaviour
 {
 
     public List<List<GameObject>> grid_list;
+    public List<GridObject> builtRooms;
+    public Button characterCreationButton;
     public float x_dist = 1.5f;
     public float y_dist = 1.5f;
     public int x_count = 10;
@@ -53,6 +56,7 @@ public class GridGenerator : MonoBehaviour
         GridObject grid = obj.GetComponent<GridObject>();
         grid.type = RoomType.pc;
         grid.SetRoomValues();
+        builtRooms.Add(grid);
     }
 
     public void CheckEmpty()
@@ -102,5 +106,35 @@ public class GridGenerator : MonoBehaviour
         GridObject grid = obj.GetComponent<GridObject>();
         grid.type = room_type;
         grid.SetRoomValues();
+        builtRooms.Add(grid);
+        CheckForAvaliableCharacterCreation();
+    }
+
+    //checks to see if theres enough space for a character to be created
+    public void CheckForAvaliableCharacterCreation()
+    {
+        int spareSpaces = 0;
+        for (int i = 0; i < builtRooms.Count; i++)
+        {
+            if (builtRooms[i].current_occupants != builtRooms[i].max_occupants)
+            {
+                for (int j = builtRooms[i].current_occupants; j < builtRooms[i].max_occupants; j++)
+                {
+                    spareSpaces++;
+                }
+            }
+        }
+
+        Debug.Log("spare Spaces" + spareSpaces);
+
+        if (spareSpaces == 0)
+        {
+            characterCreationButton.interactable = false;
+            //blank out character creation till new room added
+        }
+        else
+        {
+            characterCreationButton.interactable = true;
+        }
     }
 }
