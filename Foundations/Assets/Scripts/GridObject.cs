@@ -20,13 +20,23 @@ public class GridObject : MonoBehaviour
     }
     public void OnMouseDown()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (type == RoomType.buildable)
         {
-            ObjectPooler OP = grid_ui.GetComponent<ObjectPooler>();
-            GameObject UI = OP.GetPooledObject();
-            UI.transform.SetParent(grid_ui.transform, false);
-            UI.transform.position = transform.position;
-            UI.SetActive(true);
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                ObjectPooler OP = grid_ui.GetComponent<ObjectPooler>();
+                GameObject UI = OP.GetPooledObject();
+                foreach (Transform child in UI.transform)
+                {
+                    if (child.gameObject.GetComponent<ButtonObject>())
+                    {
+                        child.gameObject.GetComponent<ButtonObject>().room_num = grid_ID;
+                    }
+                }
+                UI.transform.SetParent(grid_ui.transform, false);
+                UI.transform.position = transform.position;
+                UI.SetActive(true);
+            }
         }
     }
 
@@ -40,7 +50,7 @@ public class GridObject : MonoBehaviour
                 current_occupants = 0;
                 break;
             case RoomType.buildable:
-                sprite = null;
+                sprite = Resources.Load<Sprite>("RoomSprites/Buildable");
                 max_occupants = 0;
                 current_occupants = 0;
                 break;
@@ -59,22 +69,22 @@ public class GridObject : MonoBehaviour
         switch (type)
         {
             case RoomType.pc:
-                sprite = null;
+                sprite = Resources.Load<Sprite>("RoomSprites/PCRoom");
                 break;
             case RoomType.lounge:
-                sprite = null;
+                sprite = Resources.Load<Sprite>("RoomSprites/lounge");
                 break;
             case RoomType.greenscreen:
-                sprite = null;
+                sprite = Resources.Load<Sprite>("RoomSprites/Greenscreen");
                 break;
             case RoomType.meeting:
-                sprite = null;
+                sprite = Resources.Load<Sprite>("RoomSprites/meetingroom");
                 break;
             case RoomType.workshop:
-                sprite = null;
+                sprite = Resources.Load<Sprite>("RoomSprites/workshop");
                 break;
             case RoomType.audio:
-                sprite = null;
+                sprite = Resources.Load<Sprite>("RoomSprites/audio");
                 break;
         }
         return sprite;

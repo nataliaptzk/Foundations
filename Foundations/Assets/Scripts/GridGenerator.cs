@@ -19,6 +19,14 @@ public class GridGenerator : MonoBehaviour
         GenerateGrid();
     }
 
+    private void Update()
+    {
+        if(grid_list != null)
+        {
+            CheckEmpty();
+        }
+    }
+
     private void GenerateGrid()
     {
         for(int y = 0; y < y_count; y++)
@@ -34,6 +42,41 @@ public class GridGenerator : MonoBehaviour
                 grid_script.SetComponents();
                 grid_script.SetRoomValues();
                 grid_list.Add(grid_obj);
+            }
+        }
+
+        GameObject obj = grid_list[0];
+        GridObject grid = obj.GetComponent<GridObject>();
+        grid.type = RoomType.pc;
+        grid.SetRoomValues();
+    }
+
+    public void CheckEmpty()
+    {
+        for(int i = 0; i < grid_list.Count; i++)
+        {
+            if(i - 1 > 0)
+            {
+                CheckIfBuildable(i, i - 1);
+            }
+            if (i + 1 < grid_list.Count - 1)
+            {
+                CheckIfBuildable(i, i + 1);
+            }
+        }
+
+    }
+
+    public void CheckIfBuildable(int index, int index_to_check)
+    {
+        GridObject grid_obj = grid_list[index].GetComponent<GridObject>();
+        if (grid_obj.type != RoomType.empty && grid_obj.type != RoomType.buildable)
+        {
+            GridObject obj1 = grid_list[index_to_check].GetComponent<GridObject>();
+            if(obj1.type == RoomType.empty)
+            {
+                obj1.type = RoomType.buildable;
+                obj1.SetRoomValues();
             }
         }
     }
