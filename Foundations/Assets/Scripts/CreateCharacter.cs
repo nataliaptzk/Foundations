@@ -7,6 +7,7 @@ public class CreateCharacter : MonoBehaviour
 {
     private string[] colours;
     public SpriteRenderer spriteRenderer;
+    public GameObject characterCreation;
     Color newColour;
     int currentIndex = 0;
     [SerializeField]
@@ -90,11 +91,17 @@ public class CreateCharacter : MonoBehaviour
 
     public void OnCreate()
     {
-
+        //need to add player coming in to scene and being saved
+        characterCreation.SetActive(false);
     }
 
     public void OnClose()
     {
+        characterCreation.SetActive(false);
+    }
 
+    public void OpenPanel()
+    {
+        characterCreation.SetActive(true);
     }
 }
