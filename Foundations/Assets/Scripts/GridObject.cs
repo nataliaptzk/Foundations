@@ -10,7 +10,8 @@ public class GridObject : MonoBehaviour
     public int current_occupants;
     public Sprite sprite;
     private SpriteRenderer sprite_renderer;
-    public int grid_ID;
+    public int grid_y;
+    public int grid_x;
     public GameObject grid_ui;
 
     public void SetComponents()
@@ -30,7 +31,9 @@ public class GridObject : MonoBehaviour
                 {
                     if (child.gameObject.GetComponent<ButtonObject>())
                     {
-                        child.gameObject.GetComponent<ButtonObject>().room_num = grid_ID;
+                        ButtonObject button = child.gameObject.GetComponent<ButtonObject>();
+                        button.room_y = grid_y;
+                        button.room_x = grid_x;
                     }
                 }
                 UI.transform.SetParent(grid_ui.transform, false);
