@@ -29,6 +29,8 @@ public class GridObject : MonoBehaviour
     public bool combined_right = false;
     private string sprite_name;
 
+    public bool isAvailable;
+
     public void SetComponents()
     {
         sprite = null;
@@ -66,16 +68,19 @@ public class GridObject : MonoBehaviour
                 sprite = null;
                 max_occupants = 0;
                 current_occupants = 0;
+                isAvailable = false;
                 break;
             case RoomType.buildable:
                 sprite = Resources.Load<Sprite>("Sprites/RoomSprites/buildable");
                 max_occupants = 0;
                 current_occupants = 0;
+                isAvailable = false;
                 break;
             default:
                 sprite = SetSprite(type);
                 max_occupants = 5;
                 current_occupants = 0;
+                isAvailable = true;
                 break;
         }
         sprite_renderer.sprite = sprite;
