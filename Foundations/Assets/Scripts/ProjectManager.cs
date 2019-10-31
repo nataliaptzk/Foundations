@@ -12,14 +12,14 @@ public class ProjectManager : MonoBehaviour
     public List<ProjectClass> _projects = new List<ProjectClass>();
 
     [SerializeField] private GridGenerator _gridGenerator;
-    [SerializeField] private PlayerManager _playerManager;
-    public int peopleAmount;
+    public PlayerManager _playerManager;
 
     [SerializeField] private GameObject _buttonPrefab;
     [SerializeField] private GameObject _panelForButtons;
     [SerializeField] private GameObject _mainPanel; // this is used to pass it to assigncharactertotheproject script in buttons
 
-    public PlayerManager Manager => _playerManager;
+    public GameObject _lastPressed;
+    //   public PlayerManager Manager => _playerManager;
 
     public GameObject MainPanel => _mainPanel;
 
@@ -85,9 +85,9 @@ public class ProjectManager : MonoBehaviour
     public void DisplayAvailableCharactersRequired(ProjectIndexHolder indexProject)
     {
         List<int> availablePlayersIndexes = new List<int>();
-        for (int i = 0; i < Manager.players.Count; i++)
+        for (int i = 0; i < _playerManager.players.Count; i++)
         {
-            if (Manager.players[i].avaliableForWork && Manager.players[i].job == _projects[indexProject.projectIndexHolder].JobRequirement)
+            if (_playerManager.players[i].avaliableForWork && _playerManager.players[i].job == _projects[indexProject.projectIndexHolder].JobRequirement)
             {
                 availablePlayersIndexes.Add(i);
             }
@@ -101,9 +101,9 @@ public class ProjectManager : MonoBehaviour
     public void DisplayAvailableCharactersGeneral()
     {
         List<int> availablePlayersIndexes = new List<int>();
-        for (int i = 0; i < Manager.players.Count; i++)
+        for (int i = 0; i < _playerManager.players.Count; i++)
         {
-            if (Manager.players[i].avaliableForWork)
+            if (_playerManager.players[i].avaliableForWork)
             {
                 availablePlayersIndexes.Add(i);
             }
@@ -113,6 +113,10 @@ public class ProjectManager : MonoBehaviour
         CreateButtons(availablePlayersIndexes);
     }
 
+    public void SetLastPressed(GameObject button)
+    {
+        _lastPressed = button;
+    }
 
     // find available projects
 
@@ -133,19 +137,24 @@ public class ProjectManager : MonoBehaviour
 
     public void CreateButtons(List<int> availablePlayers)
     {
-        // remove all current buttons
-        foreach (Transform child in _panelForButtons.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        RemoveButtons();
 
         foreach (var player in availablePlayers)
         {
             GameObject button = Instantiate(_buttonPrefab, _panelForButtons.transform, true);
             button.transform.localScale = new Vector3(1f, 1f, 1f);
             //  button.GetComponent<Image>().sprite = player.
-            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Manager.players[player].job.ToString(); //Changing text
+            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[player].job.ToString(); //Changing text
             button.GetComponent<CharacterIndexHolder>().characterIndex = player;
+        }
+    }
+
+    public void RemoveButtons()
+    {
+// remove all current buttons
+        foreach (Transform child in _panelForButtons.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 }

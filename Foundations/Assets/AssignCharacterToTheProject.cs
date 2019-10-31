@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class AssignCharacterToTheProject : MonoBehaviour
 {
@@ -11,23 +13,19 @@ public class AssignCharacterToTheProject : MonoBehaviour
     private void Start()
     {
         var parent = gameObject.transform.parent;
-        _playerManager = parent.GetComponent<ProjectManager>().Manager;
+        _playerManager = parent.GetComponent<ProjectManager>()._playerManager;
         _projectManager = parent.GetComponent<ProjectManager>();
         // need project indexHolder from the main panel
     }
 
     public void AssignCharacterToTheProjectBip(CharacterIndexHolder indexHolder)
     {
-        // check requirements of people
-        // open the ui window, click to choose person, remove person from available, fill in all slots
-
-        // List<Player> availablePlayers = _playerManager.players.Where(player => player.avaliableForWork).ToList(); // stores all available players for the project
-        // click on player to assign
-        // player.isavailable false
-        // add to the list project.currentppl
         _projectManager._projects[_projectManager.MainPanel.GetComponent<ProjectIndexHolder>().projectIndexHolder]._currentPeople.Add(indexHolder.characterIndex);
         _playerManager.players[indexHolder.characterIndex].avaliableForWork = false;
         Debug.Log(indexHolder.characterIndex);
-        // deactivate the button that can be used to assign the character
+
+        _projectManager._lastPressed.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[indexHolder.characterIndex].job.ToString();
+        _projectManager._lastPressed.GetComponent<Button>().interactable = false;
+        _projectManager.RemoveButtons();
     }
 }
