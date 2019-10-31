@@ -164,7 +164,6 @@ public class GridGenerator : MonoBehaviour
             }
         }
 
-        Debug.Log("spare Spaces" + spareSpaces);
 
         if (spareSpaces == 0)
         {
