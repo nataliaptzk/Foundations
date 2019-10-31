@@ -49,25 +49,47 @@ public class ProjectManager : MonoBehaviour
     [ContextMenu("CheckAvailableProjects")]
     private void FindAvailableProjects()
     {
-        List<ProjectClass> notInProgressProjects = _projects.Where(project => !project.inProgress).ToList();
-        // Check for the rooms that are available: isAvailable == true
-        // List<GridObject> availableRooms = _gridGenerator.grid_list.Where(room => room.).ToList();
-        // Check for the characters that are available: isAvailable == true
-        // List<CharacterClass> availableCharacters = _characterList.character_list.Where(character => character.GetComponent<CharacterClass>().isAvailable).ToList();
+        // find rooms
+        // then check which projects can be done
+        // display the projects on the UI so the user can choose the project to start
+        List<Vector2Int> availableRoomsCoordinates = new List<Vector2Int>();
 
-
-        foreach (var v in notInProgressProjects)
+        for (int i = 0; i < _gridGenerator.grid_list.Count; i++)
         {
-            // check availavble rooms and then check which projects can be started
-            // isavailable && not combined || isavailable && right combined
-
-            // List<ProjectClass> availableProjects = _projects.Where(_projects => availableRooms.Contains(gameObject.GetComponent<GridObject>().grid_ui = v.RoomRequirement.GetType()) /*&& availableCharacters.Count<=v.PeopleRequirement*/).ToList();
+            for (int j = 0; j < _gridGenerator.grid_list[i].Count; j++)
+            {
+                if ((_gridGenerator.grid_list[i][j].GetComponent<GridObject>().isAvailable && !_gridGenerator.grid_list[i][j].GetComponent<GridObject>().combined_left &&
+                     !_gridGenerator.grid_list[i][j].GetComponent<GridObject>().combined_right) ||
+                    (_gridGenerator.grid_list[i][j].GetComponent<GridObject>().isAvailable && _gridGenerator.grid_list[i][j].GetComponent<GridObject>().combined_right &&
+                     !_gridGenerator.grid_list[i][j].GetComponent<GridObject>().combined_left))
+                {
+                    availableRoomsCoordinates.Add(new Vector2Int(i, j));
+                }
+            }
         }
+
+        List<int> availableProjectsIndexes = new List<int>();
+        foreach (var t in availableRoomsCoordinates)
+        {
+            for (int j = 0; j < _projects.Count; j++)
+            {
+                if (_projects[j].RoomRequirement == _gridGenerator.grid_list[t.x][t.y].GetComponent<GridObject>().type)
+                {
+                    availableProjectsIndexes.Add(j);
+                }
+            }
+        }
+
+        DisplayAvailableProjects(availableProjectsIndexes);
     }
 
-    private void DisplayAvailableProjects(List<ProjectClass> availableProjects)
+    //TODO display the projects on ui
+    private void DisplayAvailableProjects(List<int> availableProjectsIndexes)
     {
-        //  List<ProjectClass> availableProjects = _projects.Where(_projects => availableRooms.Contains(gameObject.GetComponent<GridObject>().grid_ui = v.RoomRequirement.GetType()) /*&& availableCharacters.Count<=v.PeopleRequirement*/).ToList();
+        foreach (var index in availableProjectsIndexes)
+        {
+            Debug.Log(_projects[index]);
+        }
     }
 
     public void OpenProjectWindow(int indexProject)
@@ -76,13 +98,12 @@ public class ProjectManager : MonoBehaviour
         _mainPanel.GetComponent<ProjectIndexHolder>().projectIndexHolder = indexProject;
 
 
-        // clone the charcter_panel_assignemnt
-
-        // add timer here
+        // TODO open the charcter_panel_assignemnt window
     }
 
     private void ProjectProgress()
     {
+        // TODO add timer here
     }
 
     public void DisplayAvailableCharactersRequired(ProjectIndexHolder indexProject)
@@ -119,7 +140,7 @@ public class ProjectManager : MonoBehaviour
         _lastPressed = button;
     }
 
-
+    //TODO change parameter
     private void FinishProject(int indexProject)
     {
         _projects[indexProject].inProgress = false;
@@ -129,7 +150,8 @@ public class ProjectManager : MonoBehaviour
             _playerManager.players[person].avaliableForWork = true;
         }
 
-        // will call the function to add the income
+        // TODO remove the coordinates from the project
+        // TODO will call the function to add the income
     }
 
     public void CancelProject(ProjectIndexHolder indexProject)
@@ -139,8 +161,9 @@ public class ProjectManager : MonoBehaviour
         {
             _playerManager.players[person].avaliableForWork = true;
         }
+        // TODO remove the coordinates from the project
 
-        // reset the project window
+        // TODO reset the project window
     }
 
     public void CreateButtons(List<int> availablePlayers)
@@ -159,7 +182,7 @@ public class ProjectManager : MonoBehaviour
 
     public void RemoveButtons()
     {
-// remove all current buttons
+        // remove all current buttons
         foreach (Transform child in _panelForButtons.transform)
         {
             Destroy(child.gameObject);

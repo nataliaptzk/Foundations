@@ -13,6 +13,7 @@ public class ProjectClass
     [SerializeField] private RoomType _roomRequirement;
     [SerializeField] private CreateCharacter.Jobs _jobRequirement;
 
+    public int locX, locY;
     public List<int> _currentPeople;
     public bool inProgress;
 
