@@ -11,19 +11,22 @@ public class ProjectClass
     [SerializeField] private float _duration;
     [SerializeField] private int _peopleRequirement;
     [SerializeField] private RoomType _roomRequirement;
+    [SerializeField] private CreateCharacter.Jobs _jobRequirement;
 
-    public List<Player> _currentPeople;
+    public List<int> _currentPeople;
     public bool inProgress;
 
-    public ProjectClass(string title, int income, float duration, int peopleRequirement, RoomType roomRequirement)
+    public ProjectClass(string title, int income, float duration, int peopleRequirement, RoomType roomRequirement, CreateCharacter.Jobs jobRequirement)
     {
         _title = title;
         _income = income;
         _duration = duration;
         _peopleRequirement = peopleRequirement;
         _roomRequirement = roomRequirement;
+        _jobRequirement = jobRequirement;
+
         inProgress = false;
-        _currentPeople = new List<Player>();
+        _currentPeople = new List<int>();
     }
 
     public int Income => _income;
@@ -31,4 +34,5 @@ public class ProjectClass
     public float Duration => _duration;
     public int PeopleRequirement => _peopleRequirement;
     public RoomType RoomRequirement => _roomRequirement;
+    public CreateCharacter.Jobs JobRequirement => _jobRequirement;
 }
