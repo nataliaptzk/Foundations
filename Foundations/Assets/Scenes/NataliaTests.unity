@@ -4678,6 +4678,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_ProjectCreation
       objectReference: {fileID: 0}
+    - target: {fileID: 1552091876634771794, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1552091876634771805, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5063,6 +5068,16 @@ PrefabInstance:
       propertyPath: _playerManager
       value: 
       objectReference: {fileID: 72881278}
+    - target: {fileID: 1552091877462384397, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552091877462384397, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -8.44
+      objectReference: {fileID: 0}
     - target: {fileID: 1552091877925222186, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_AnchorMax.x

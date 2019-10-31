@@ -16,10 +16,9 @@ public class ProjectManager : MonoBehaviour
 
     [SerializeField] private GameObject _buttonPrefab;
     [SerializeField] private GameObject _panelForButtons;
-    [SerializeField] private GameObject _mainPanel; // this is used to pass it to assigncharactertotheproject script in buttons
+    [SerializeField] private GameObject _mainPanel;
 
     public GameObject _lastPressed;
-    //   public PlayerManager Manager => _playerManager;
 
     public GameObject MainPanel => _mainPanel;
 
@@ -71,15 +70,19 @@ public class ProjectManager : MonoBehaviour
         //  List<ProjectClass> availableProjects = _projects.Where(_projects => availableRooms.Contains(gameObject.GetComponent<GridObject>().grid_ui = v.RoomRequirement.GetType()) /*&& availableCharacters.Count<=v.PeopleRequirement*/).ToList();
     }
 
-    public void StartProject(int indexProject)
+    public void OpenProjectWindow(int indexProject)
     {
         _projects[indexProject].inProgress = true;
+        _mainPanel.GetComponent<ProjectIndexHolder>().projectIndexHolder = indexProject;
+
+
         // clone the charcter_panel_assignemnt
-        // assign holderindex to indexproject
 
         // add timer here
+    }
 
-        FinishProject(indexProject);
+    private void ProjectProgress()
+    {
     }
 
     public void DisplayAvailableCharactersRequired(ProjectIndexHolder indexProject)
@@ -93,7 +96,6 @@ public class ProjectManager : MonoBehaviour
             }
         }
 
-        // List<Player> availableRequiredCharacters = _playerManager.players.Where(character => character.avaliableForWork && character.job.Equals(_projects[indexProject.projectIndexHolder].JobRequirement)).ToList();
         CreateButtons(availablePlayersIndexes);
     }
 
@@ -109,7 +111,6 @@ public class ProjectManager : MonoBehaviour
             }
         }
 
-        //List<Player> availableGeneralCharacters = _playerManager.players.Where(character => character.avaliableForWork).ToList();
         CreateButtons(availablePlayersIndexes);
     }
 
@@ -118,14 +119,15 @@ public class ProjectManager : MonoBehaviour
         _lastPressed = button;
     }
 
-    // find available projects
-
 
     private void FinishProject(int indexProject)
     {
         _projects[indexProject].inProgress = false;
 
-        // go through the project.currentppl and change their isavailable
+        foreach (var person in _projects[indexProject]._currentPeople)
+        {
+            _playerManager.players[person].avaliableForWork = true;
+        }
 
         // will call the function to add the income
     }
@@ -133,6 +135,12 @@ public class ProjectManager : MonoBehaviour
     public void CancelProject(ProjectIndexHolder indexProject)
     {
         _projects[indexProject.projectIndexHolder].inProgress = false;
+        foreach (var person in _projects[indexProject.projectIndexHolder]._currentPeople)
+        {
+            _playerManager.players[person].avaliableForWork = true;
+        }
+
+        // reset the project window
     }
 
     public void CreateButtons(List<int> availablePlayers)
