@@ -119,20 +119,23 @@ public class GridGenerator : MonoBehaviour
                 {
                     continue;
                 }
-                if(x > 0)
+                bool combined = false;
+                if(x > 0 && combined == false)
                 {
                     GridObject checked_obj = grid_list[y][x - 1].GetComponent<GridObject>();
                     if (checked_obj.type == obj.type && checked_obj.combined_left == false)
                     {
                         obj.SetCombinedRoom(true);
+                        combined = true;
                     }
                 }
-                if(x < x_count - 1)
+                if(x < x_count - 1 && combined == false)
                 {
                     GridObject checked_obj = grid_list[y][x + 1].GetComponent<GridObject>();
                     if (checked_obj.type == obj.type && checked_obj.combined_right == false)
                     {
                         obj.SetCombinedRoom(false);
+                        combined = true;
                     }
                 }
             }

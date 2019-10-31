@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+public enum RoomType
+{
+    empty,
+    buildable,
+    pc,
+    greenscreen,
+    lounge,
+    meeting,
+    audio,
+    workshop
+}
+
 public class GridObject : MonoBehaviour
 {
     public RoomType type;

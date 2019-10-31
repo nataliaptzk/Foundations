@@ -152,7 +152,6 @@ public class MultiTouchCamera : MonoBehaviour
             if (active_touch_locations.Count < old_count)
             {
                 old_count = active_touch_locations.Count;
-                Debug.Log("yo");
                 SetLerpDuringValues();
             }
         }
