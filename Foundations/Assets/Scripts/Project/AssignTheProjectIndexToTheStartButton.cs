@@ -11,11 +11,6 @@ public class AssignTheProjectIndexToTheStartButton : MonoBehaviour
 
     public void AssignTheProjectIndex(ProjectIndexHolder projectIndex)
     {
-        // open the project window
-        // assign the project index to the window
-        // start button has to get where to child the window
-
-
         projectManager._projects[projectIndex.projectIndexHolder].inProgress = true;
 
         AssignRoom(projectIndex.projectIndexHolder);
@@ -25,7 +20,6 @@ public class AssignTheProjectIndexToTheStartButton : MonoBehaviour
 
     private void AssignRoom(int projectIndex)
     {
-        //PlaceTheProjectWindow(projectIndex, new Vector2(1, 1));
 
         List<Vector2Int> roomIndexes = new List<Vector2Int>();
 
@@ -47,11 +41,13 @@ public class AssignTheProjectIndexToTheStartButton : MonoBehaviour
         projectManager._gridGenerator.grid_list[roomIndexes[randomRoom].x][roomIndexes[randomRoom].y].GetComponent<GridObject>().isAvailable = false;
     }
 
-    private void PlaceTheProjectWindow(int projectIndex, Vector2 roomCoordinates)
+    private void PlaceTheProjectWindow(int projectIndex, Vector2Int roomCoordinates)
     {
         GameObject projectPanel = Instantiate(_panelPrefab, _projectPanelParent.transform, true);
         projectPanel.transform.localScale = new Vector3(1f, 1f, 1f);
-        projectPanel.transform.localPosition = new Vector3(1f, 1f, 1f); // todo whereever the picked room is
+
+        Vector3 newWindowPosition = projectManager._gridGenerator.grid_list[roomCoordinates.x][roomCoordinates.y].gameObject.transform.position;
+        projectPanel.transform.localPosition = newWindowPosition; // todo whereever the picked room is
         projectPanel.GetComponent<ProjectPanel>().projectManager = projectManager;
         projectPanel.GetComponent<ProjectIndexHolder>().projectIndexHolder = projectIndex;
         projectPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = projectManager._projects[projectIndex].JobRequirement.ToString();

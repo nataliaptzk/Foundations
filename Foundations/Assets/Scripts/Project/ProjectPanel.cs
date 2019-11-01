@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProjectPanel : MonoBehaviour
 {
@@ -10,12 +11,34 @@ public class ProjectPanel : MonoBehaviour
     private PlayerManager _playerManager;
     [SerializeField] private GameObject _panelForButtons;
     [SerializeField] private GameObject _buttonPrefab;
+    [SerializeField] private Sprite _playerSprite;
     public GameObject lastPressed;
 
+    public List<GameObject> buttons = new List<GameObject>();
 
     private void Start()
     {
         _playerManager = projectManager._playerManager;
+        buttons.Add(gameObject.transform.GetChild(1).gameObject);
+        buttons.Add(gameObject.transform.GetChild(2).gameObject);
+        buttons.Add(gameObject.transform.GetChild(3).gameObject);
+        buttons.Add(gameObject.transform.GetChild(4).gameObject);
+        buttons.Add(gameObject.transform.GetChild(5).gameObject);
+
+        foreach (var button in buttons)
+        {
+            button.SetActive(false);
+        }
+
+        DisplayButtons();
+    }
+
+    private void DisplayButtons()
+    {
+        for (int i = 0; i < projectManager._projects[this.GetComponent<ProjectIndexHolder>().projectIndexHolder].PeopleRequirement; i++)
+        {
+            buttons[i].gameObject.SetActive(true);
+        }
     }
 
     public void DisplayAvailableCharactersRequired(ProjectIndexHolder indexProject)
@@ -61,18 +84,60 @@ public class ProjectPanel : MonoBehaviour
             _playerManager.players[person].avaliableForWork = true;
         }
 
+        projectManager._projects[projectIndex]._currentPeople.Clear();
+
         projectManager._gridGenerator.grid_list[projectManager._projects[projectIndex].assignedRoom.x][projectManager._projects[projectIndex].assignedRoom.y].GetComponent<GridObject>().isAvailable =
             true;
         projectManager.FindAvailableProjects();
         Destroy(gameObject);
     }
 
-    //TODO start the project when all character slots are filled in
-    private void StartProject()
+    public void StartProject()
     {
+        if (projectManager._projects[GetComponent<ProjectIndexHolder>().projectIndexHolder]._currentPeople.Count ==
+            projectManager._projects[GetComponent<ProjectIndexHolder>().projectIndexHolder].PeopleRequirement)
+        {
+            StartCoroutine(StartProjectProgress(GetComponent<ProjectIndexHolder>().projectIndexHolder));
+        }
     }
 
-    public void CreateButtons(List<int> availablePlayers)
+    private IEnumerator StartProjectProgress(int indexProject)
+    {
+        // not a nice way to close that window
+        int children = transform.childCount;
+        for (int i = 0; i < children; ++i)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        gameObject.GetComponent<Image>().enabled = false;
+
+        yield return new WaitForSecondsRealtime(projectManager._projects[indexProject].Duration);
+
+        FinishProject(indexProject);
+    }
+
+    private void FinishProject(int indexProject)
+    {
+        projectManager._projects[indexProject].inProgress = false;
+
+        foreach (var person in projectManager._projects[indexProject]._currentPeople)
+        {
+            _playerManager.players[person].avaliableForWork = true;
+        }
+
+        projectManager._projects[indexProject]._currentPeople.Clear();
+        projectManager._gridGenerator.grid_list[projectManager._projects[indexProject].assignedRoom.x][projectManager._projects[indexProject].assignedRoom.y].GetComponent<GridObject>().isAvailable =
+            true;
+        projectManager.FindAvailableProjects();
+
+        //todo income doesnt work
+        Income.addIncomeAmount(projectManager._projects[indexProject].Income);
+        Destroy(gameObject);
+    }
+
+
+    private void CreateButtons(List<int> availablePlayers)
     {
         RemoveButtons();
 
@@ -80,7 +145,11 @@ public class ProjectPanel : MonoBehaviour
         {
             GameObject button = Instantiate(_buttonPrefab, _panelForButtons.transform, true);
             button.transform.localScale = new Vector3(1f, 1f, 1f);
-            //  TODO button.GetComponent<Image>().sprite = player.
+
+            button.GetComponent<Image>().sprite = _playerSprite;
+            ColorUtility.TryParseHtmlString(_playerManager.players[player].colour, out var newColour);
+            button.GetComponent<Image>().color = newColour;
+
             button.GetComponent<AssignCharacterToTheProject>().projectManager = projectManager;
             button.GetComponent<AssignCharacterToTheProject>().projectPanel = this;
             button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[player].job.ToString(); //Changing text

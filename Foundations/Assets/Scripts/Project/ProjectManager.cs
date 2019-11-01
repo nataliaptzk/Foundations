@@ -10,16 +10,12 @@ using UnityEngine.UI;
 public class ProjectManager : MonoBehaviour
 {
     public List<ProjectClass> _projects = new List<ProjectClass>();
-
     public GridGenerator _gridGenerator;
     public PlayerManager _playerManager;
 
     [SerializeField] private GameObject _rowPrefab;
     [SerializeField] private GameObject _panelForProjects;
-
     [SerializeField] private GameObject _projectPanel;
-
-    // public GameObject MainPanel => _mainPanel;
 
     private void Start()
     {
@@ -28,7 +24,7 @@ public class ProjectManager : MonoBehaviour
 
     private void CreateProjects()
     {
-        _projects.Add(new ProjectClass("NewProject.Begin();", 100, 20, 1, RoomType.pc, CreateCharacter.Jobs.programmer));
+        _projects.Add(new ProjectClass("NewProject.Begin();", 100, 15, 1, RoomType.pc, CreateCharacter.Jobs.programmer));
         _projects.Add(new ProjectClass("Can't see sharp", 250, 25, 3, RoomType.pc, CreateCharacter.Jobs.programmer));
         _projects.Add(new ProjectClass("Income++", 500, 50, 5, RoomType.pc, CreateCharacter.Jobs.gameDesigner));
         _projects.Add(new ProjectClass("As green as grass", 100, 10, 1, RoomType.greenscreen, CreateCharacter.Jobs.actor));
@@ -87,30 +83,7 @@ public class ProjectManager : MonoBehaviour
         CreateProjectRows(availableProjectsIndexes);
     }
 
-
-    private void ProjectProgress()
-    {
-        // TODO add timer here
-    }
-
-
-    // TODO change parameter
-    private void FinishProject(int indexProject)
-    {
-        _projects[indexProject].inProgress = false;
-
-        foreach (var person in _projects[indexProject]._currentPeople)
-        {
-            _playerManager.players[person].avaliableForWork = true;
-        }
-
-        // TODO remove the coordinates from the project
-        // TODO make room available again
-        // TODO will call the function to add the income
-    }
-
-
-    public void CreateProjectRows(List<int> availableProjects)
+    private void CreateProjectRows(List<int> availableProjects)
     {
         RemoveRows();
 
@@ -126,7 +99,7 @@ public class ProjectManager : MonoBehaviour
         }
     }
 
-    public void RemoveRows()
+    private void RemoveRows()
     {
         // remove all current project rows
         foreach (Transform child in _panelForProjects.transform)
