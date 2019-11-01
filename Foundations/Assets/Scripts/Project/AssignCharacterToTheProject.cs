@@ -20,10 +20,10 @@ public class AssignCharacterToTheProject : MonoBehaviour
     {
         projectManager._projects[projectPanel.GetComponent<ProjectIndexHolder>().projectIndexHolder]._currentPeople.Add(indexHolder.characterIndex);
         _playerManager.players[indexHolder.characterIndex].avaliableForWork = false;
-        Debug.Log(indexHolder.characterIndex);
 
         projectPanel.lastPressed.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[indexHolder.characterIndex].job.ToString();
         projectPanel.lastPressed.GetComponent<Button>().interactable = false;
+
         projectPanel.RemoveButtons();
     }
 }
