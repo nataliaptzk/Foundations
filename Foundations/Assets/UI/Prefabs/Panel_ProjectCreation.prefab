@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1552091876150322430}
   - component: {fileID: 1552091876150322431}
   m_Layer: 5
-  m_Name: Btn_0 (1)
+  m_Name: Btn_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6371324969493685231}
         m_MethodName: DisplayAvailableCharactersGeneral
         m_Mode: 1
         m_Arguments:
@@ -130,7 +130,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6371324969493685231}
+        m_MethodName: SetLastPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1552091876150322429}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1552091876333889418
@@ -691,6 +702,7 @@ GameObject:
   - component: {fileID: 1552091876634771807}
   - component: {fileID: 1552091876634771804}
   - component: {fileID: 1552091876634771806}
+  - component: {fileID: 6371324969493685231}
   m_Layer: 5
   m_Name: Panel_ProjectCreation
   m_TagString: Untagged
@@ -776,6 +788,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectIndexHolder: 0
+--- !u!114 &6371324969493685231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552091876634771794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e426da61f7b544fbd56d3e29ea63c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectManager: {fileID: 0}
+  _panelForButtons: {fileID: 1552091877404444363}
+  _buttonPrefab: {fileID: 2457159974832491598, guid: 554b934619b80d147896836f4b6a21b6,
+    type: 3}
+  lastPressed: {fileID: 0}
 --- !u!1 &1552091876758079101
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,7 +818,7 @@ GameObject:
   - component: {fileID: 1552091876758079102}
   - component: {fileID: 1552091876758079103}
   m_Layer: 5
-  m_Name: Btn_0 (3)
+  m_Name: Btn_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -896,7 +925,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6371324969493685231}
         m_MethodName: DisplayAvailableCharactersGeneral
         m_Mode: 1
         m_Arguments:
@@ -906,7 +935,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6371324969493685231}
+        m_MethodName: SetLastPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1552091876758079101}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1552091876920007863
@@ -1186,7 +1226,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6371324969493685231}
         m_MethodName: DisplayAvailableCharactersRequired
         m_Mode: 2
         m_Arguments:
@@ -1196,7 +1236,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6371324969493685231}
+        m_MethodName: SetLastPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1552091877125174302}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1552091877300532659
@@ -1587,12 +1638,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6371324969493685231}
         m_MethodName: CancelProject
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1552091876634771806}
-          m_ObjectArgumentAssemblyTypeName: ProjectIndexHolder, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1720,7 +1771,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1552091876576744478}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999996
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1740,7 +1791,7 @@ GameObject:
   - component: {fileID: 1552091877534070735}
   - component: {fileID: 1552091877534070732}
   m_Layer: 5
-  m_Name: Btn_0 (2)
+  m_Name: Btn_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1847,7 +1898,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6371324969493685231}
         m_MethodName: DisplayAvailableCharactersGeneral
         m_Mode: 1
         m_Arguments:
@@ -1857,7 +1908,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6371324969493685231}
+        m_MethodName: SetLastPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1552091877534070722}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1552091877680823775
@@ -2545,7 +2607,7 @@ GameObject:
   - component: {fileID: 1552091878118084055}
   - component: {fileID: 1552091878118084052}
   m_Layer: 5
-  m_Name: Btn_0 (4)
+  m_Name: Btn_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2652,7 +2714,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6371324969493685231}
         m_MethodName: DisplayAvailableCharactersGeneral
         m_Mode: 1
         m_Arguments:
@@ -2662,7 +2724,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6371324969493685231}
+        m_MethodName: SetLastPressed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1552091878118084042}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &4090208880565904048

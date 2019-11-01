@@ -13,8 +13,9 @@ public class ProjectClass
     [SerializeField] private RoomType _roomRequirement;
     [SerializeField] private CreateCharacter.Jobs _jobRequirement;
 
-    public int locX, locY;
+  //  public int locX, locY;
     public List<int> _currentPeople;
+    public Vector2Int assignedRoom;
     public bool inProgress;
 
     public ProjectClass(string title, int income, float duration, int peopleRequirement, RoomType roomRequirement, CreateCharacter.Jobs jobRequirement)
