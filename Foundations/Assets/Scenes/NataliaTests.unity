@@ -478,19 +478,13 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99039095}
   m_CullTransparentMesh: 0
---- !u!1 &117066992 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1552091876634771794, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
-    type: 3}
-  m_PrefabInstance: {fileID: 1552091877492981605}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &117066993 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1552091876634771806, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
     type: 3}
   m_PrefabInstance: {fileID: 1552091877492981605}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117066992}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d6a6895d285e5444b0044ea6e48f2f6, type: 3}
@@ -1586,14 +1580,10 @@ MonoBehaviour:
   _projects: []
   _gridGenerator: {fileID: 184165196}
   _playerManager: {fileID: 72881278}
-  _buttonPrefab: {fileID: 2457159974832491598, guid: 554b934619b80d147896836f4b6a21b6,
-    type: 3}
   _rowPrefab: {fileID: 252796241489440639, guid: 6cfb02f1bdcf43343b6a8d97503e6ed0,
     type: 3}
-  _panelForButtons: {fileID: 421699531}
   _panelForProjects: {fileID: 1133459210}
-  _mainPanel: {fileID: 117066992}
-  _lastPressed: {fileID: 0}
+  _projectPanel: {fileID: 1881850941}
 --- !u!1 &583192034
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,7 +2501,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012985882}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54e0ae80e5130344b9ba897dd73e7d5a, type: 3}
   m_Name: 
@@ -5499,6 +5489,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1881850942}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: _gridGenerator
+      value: 
+      objectReference: {fileID: 184165196}
+    - target: {fileID: 0}
+      propertyPath: _playerManager
+      value: 
+      objectReference: {fileID: 72881278}
+    - target: {fileID: 0}
+      propertyPath: _panelForProjects
+      value: 
+      objectReference: {fileID: 1133459210}
+    - target: {fileID: 0}
+      propertyPath: _rowPrefab
+      value: 
+      objectReference: {fileID: 252796241489440639, guid: 6cfb02f1bdcf43343b6a8d97503e6ed0,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1552091876634771794, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_Name
@@ -5507,38 +5518,12 @@ PrefabInstance:
     - target: {fileID: 1552091876634771794, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1552091877534070722, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_Name
       value: Btn_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1552091877404444375, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
-        type: 3}
-      propertyPath: _gridGenerator
-      value: 
-      objectReference: {fileID: 184165196}
-    - target: {fileID: 1552091877404444375, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
-        type: 3}
-      propertyPath: _playerManager
-      value: 
-      objectReference: {fileID: 72881278}
-    - target: {fileID: 1552091877404444375, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
-        type: 3}
-      propertyPath: _panelForProjects
-      value: 
-      objectReference: {fileID: 1133459210}
-    - target: {fileID: 1552091877404444375, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
-        type: 3}
-      propertyPath: _rowPrefab
-      value: 
-      objectReference: {fileID: 252796241489440639, guid: 6cfb02f1bdcf43343b6a8d97503e6ed0,
-        type: 3}
-    - target: {fileID: 1552091877404444375, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1552091878118084042, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
@@ -5978,22 +5963,22 @@ PrefabInstance:
     - target: {fileID: 1552091878021999307, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1552091878021999307, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1552091878021999307, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -8.44
       objectReference: {fileID: 0}
     - target: {fileID: 1552091877404444372, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1552091877462384397, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
@@ -6008,12 +5993,12 @@ PrefabInstance:
     - target: {fileID: 1552091877925222186, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1552091877925222186, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1552091877424661474, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
         type: 3}
@@ -6055,6 +6040,10 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1552091877404444375, guid: 88437a5ae2c1d4c46991a79e3bfeab66, type: 3}
+    - target: {fileID: 6371324969493685231, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
+        type: 3}
+      propertyPath: _panelForButtons
+      value: 
+      objectReference: {fileID: 421699531}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88437a5ae2c1d4c46991a79e3bfeab66, type: 3}

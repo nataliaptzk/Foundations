@@ -14,15 +14,12 @@ public class ProjectManager : MonoBehaviour
     [SerializeField] private GridGenerator _gridGenerator;
     public PlayerManager _playerManager;
 
-    [SerializeField] private GameObject _buttonPrefab;
     [SerializeField] private GameObject _rowPrefab;
-    [SerializeField] private GameObject _panelForButtons;
     [SerializeField] private GameObject _panelForProjects;
-    [SerializeField] private GameObject _mainPanel;
 
-    public GameObject _lastPressed;
+    [SerializeField] private GameObject _projectPanel;
 
-    public GameObject MainPanel => _mainPanel;
+   // public GameObject MainPanel => _mainPanel;
 
     private void Start()
     {
@@ -51,9 +48,6 @@ public class ProjectManager : MonoBehaviour
     [ContextMenu("CheckAvailableProjects")]
     public void FindAvailableProjects()
     {
-        // find rooms
-        // then check which projects can be done
-        // display the projects on the UI so the user can choose the project to start
         List<Vector2Int> availableRoomsCoordinates = new List<Vector2Int>();
 
         for (int i = 0; i < _gridGenerator.grid_list.Count; i++)
@@ -88,8 +82,7 @@ public class ProjectManager : MonoBehaviour
         DisplayAvailableProjects(availableProjectsIndexes);
     }
 
-    // TODO display the projects on ui
-    private void DisplayAvailableProjects(List<int> availableProjectsIndexes)
+   private void DisplayAvailableProjects(List<int> availableProjectsIndexes)
     {
         CreateProjectRows(availableProjectsIndexes);
     }
@@ -98,59 +91,13 @@ public class ProjectManager : MonoBehaviour
     {
         // TODO pick a random room and assign it to the project
     }
-
-    public void OpenProjectWindow(int indexProject)
-    {
-        _projects[indexProject].inProgress = true;
-        _mainPanel.GetComponent<ProjectIndexHolder>().projectIndexHolder = indexProject;
-
-
-        // TODO open the charcter_panel_assignemnt window
-    }
-
-    //TODO start the project when all character slots are filled in
-    private void StartProject()
-    {
-    }
-
+ 
     private void ProjectProgress()
     {
         // TODO add timer here
     }
 
-    public void DisplayAvailableCharactersRequired(ProjectIndexHolder indexProject)
-    {
-        List<int> availablePlayersIndexes = new List<int>();
-        for (int i = 0; i < _playerManager.players.Count; i++)
-        {
-            if (_playerManager.players[i].avaliableForWork && _playerManager.players[i].job == _projects[indexProject.projectIndexHolder].JobRequirement)
-            {
-                availablePlayersIndexes.Add(i);
-            }
-        }
 
-        CreateButtons(availablePlayersIndexes);
-    }
-
-
-    public void DisplayAvailableCharactersGeneral()
-    {
-        List<int> availablePlayersIndexes = new List<int>();
-        for (int i = 0; i < _playerManager.players.Count; i++)
-        {
-            if (_playerManager.players[i].avaliableForWork)
-            {
-                availablePlayersIndexes.Add(i);
-            }
-        }
-
-        CreateButtons(availablePlayersIndexes);
-    }
-
-    public void SetLastPressed(GameObject button)
-    {
-        _lastPressed = button;
-    }
 
     // TODO change parameter
     private void FinishProject(int indexProject)
@@ -167,41 +114,8 @@ public class ProjectManager : MonoBehaviour
         // TODO will call the function to add the income
     }
 
-    public void CancelProject(ProjectIndexHolder indexProject)
-    {
-        _projects[indexProject.projectIndexHolder].inProgress = false;
-        foreach (var person in _projects[indexProject.projectIndexHolder]._currentPeople)
-        {
-            _playerManager.players[person].avaliableForWork = true;
-        }
-        
-        _mainPanel.gameObject.SetActive(false);
-        // TODO remove the coordinates from the project
-    }
+   
 
-    public void CreateButtons(List<int> availablePlayers)
-    {
-        RemoveButtons();
-
-        foreach (var player in availablePlayers)
-        {
-            GameObject button = Instantiate(_buttonPrefab, _panelForButtons.transform, true);
-            button.transform.localScale = new Vector3(1f, 1f, 1f);
-            //  TODO button.GetComponent<Image>().sprite = player.
-            button.GetComponent<AssignCharacterToTheProject>().projectManager = this;
-            button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[player].job.ToString(); //Changing text
-            button.GetComponent<CharacterIndexHolder>().characterIndex = player;
-        }
-    }
-
-    public void RemoveButtons()
-    {
-        // remove all current buttons
-        foreach (Transform child in _panelForButtons.transform)
-        {
-            Destroy(child.gameObject);
-        }
-    }
 
     public void CreateProjectRows(List<int> availableProjects)
     {
@@ -213,9 +127,12 @@ public class ProjectManager : MonoBehaviour
             {
                 GameObject row = Instantiate(_rowPrefab, _panelForProjects.transform, true);
                 row.transform.localScale = new Vector3(1f, 1f, 1f);
+                row.transform.localPosition = new Vector3(1f, 1f, 1f);
                 row.GetComponent<ProjectIndexHolder>().projectIndexHolder = availableProjects[i];
                 row.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _projects[availableProjects[i]].Title;
                 row.GetComponent<AssignTheProjectIndexToTheStartButton>().projectManager = this;
+                row.GetComponent<AssignTheProjectIndexToTheStartButton>()._projectPanelParent = _projectPanel;
+
                 //  button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[player].job.ToString(); //Changing text
                 //  button.GetComponent<CharacterIndexHolder>().characterIndex = player;
             }

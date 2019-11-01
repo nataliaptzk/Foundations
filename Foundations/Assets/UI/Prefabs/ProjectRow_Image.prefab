@@ -105,6 +105,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectManager: {fileID: 0}
+  _projectPanelParent: {fileID: 0}
+  _panelPrefab: {fileID: 1552091876634771794, guid: 88437a5ae2c1d4c46991a79e3bfeab66,
+    type: 3}
 --- !u!1 &4150410074105381023
 GameObject:
   m_ObjectHideFlags: 0
