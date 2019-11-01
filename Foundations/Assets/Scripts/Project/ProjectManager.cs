@@ -15,7 +15,9 @@ public class ProjectManager : MonoBehaviour
     public PlayerManager _playerManager;
 
     [SerializeField] private GameObject _buttonPrefab;
+    [SerializeField] private GameObject _rowPrefab;
     [SerializeField] private GameObject _panelForButtons;
+    [SerializeField] private GameObject _panelForProjects;
     [SerializeField] private GameObject _mainPanel;
 
     public GameObject _lastPressed;
@@ -47,7 +49,7 @@ public class ProjectManager : MonoBehaviour
     }
 
     [ContextMenu("CheckAvailableProjects")]
-    private void FindAvailableProjects()
+    public void FindAvailableProjects()
     {
         // find rooms
         // then check which projects can be done
@@ -73,9 +75,12 @@ public class ProjectManager : MonoBehaviour
         {
             for (int j = 0; j < _projects.Count; j++)
             {
-                if (_projects[j].RoomRequirement == _gridGenerator.grid_list[t.x][t.y].GetComponent<GridObject>().type)
+                if (_projects[j].RoomRequirement == _gridGenerator.grid_list[t.x][t.y].GetComponent<GridObject>().type && !_projects[j].inProgress)
                 {
-                    availableProjectsIndexes.Add(j);
+                    if (!availableProjectsIndexes.Contains(j))
+                    {
+                        availableProjectsIndexes.Add(j);
+                    }
                 }
             }
         }
@@ -83,13 +88,15 @@ public class ProjectManager : MonoBehaviour
         DisplayAvailableProjects(availableProjectsIndexes);
     }
 
-    //TODO display the projects on ui
+    // TODO display the projects on ui
     private void DisplayAvailableProjects(List<int> availableProjectsIndexes)
     {
-        foreach (var index in availableProjectsIndexes)
-        {
-            Debug.Log(_projects[index]);
-        }
+        CreateProjectRows(availableProjectsIndexes);
+    }
+
+    public void AssignRoom()
+    {
+        // TODO pick a random room and assign it to the project
     }
 
     public void OpenProjectWindow(int indexProject)
@@ -99,6 +106,11 @@ public class ProjectManager : MonoBehaviour
 
 
         // TODO open the charcter_panel_assignemnt window
+    }
+
+    //TODO start the project when all character slots are filled in
+    private void StartProject()
+    {
     }
 
     private void ProjectProgress()
@@ -140,7 +152,7 @@ public class ProjectManager : MonoBehaviour
         _lastPressed = button;
     }
 
-    //TODO change parameter
+    // TODO change parameter
     private void FinishProject(int indexProject)
     {
         _projects[indexProject].inProgress = false;
@@ -151,6 +163,7 @@ public class ProjectManager : MonoBehaviour
         }
 
         // TODO remove the coordinates from the project
+        // TODO make room available again
         // TODO will call the function to add the income
     }
 
@@ -161,9 +174,9 @@ public class ProjectManager : MonoBehaviour
         {
             _playerManager.players[person].avaliableForWork = true;
         }
+        
+        _mainPanel.gameObject.SetActive(false);
         // TODO remove the coordinates from the project
-
-        // TODO reset the project window
     }
 
     public void CreateButtons(List<int> availablePlayers)
@@ -174,7 +187,8 @@ public class ProjectManager : MonoBehaviour
         {
             GameObject button = Instantiate(_buttonPrefab, _panelForButtons.transform, true);
             button.transform.localScale = new Vector3(1f, 1f, 1f);
-            //  button.GetComponent<Image>().sprite = player.
+            //  TODO button.GetComponent<Image>().sprite = player.
+            button.GetComponent<AssignCharacterToTheProject>().projectManager = this;
             button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[player].job.ToString(); //Changing text
             button.GetComponent<CharacterIndexHolder>().characterIndex = player;
         }
@@ -184,6 +198,34 @@ public class ProjectManager : MonoBehaviour
     {
         // remove all current buttons
         foreach (Transform child in _panelForButtons.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void CreateProjectRows(List<int> availableProjects)
+    {
+        RemoveRows();
+
+        // foreach (var project in availableProjects)
+        {
+            for (int i = 0; i < availableProjects.Count; i++)
+            {
+                GameObject row = Instantiate(_rowPrefab, _panelForProjects.transform, true);
+                row.transform.localScale = new Vector3(1f, 1f, 1f);
+                row.GetComponent<ProjectIndexHolder>().projectIndexHolder = availableProjects[i];
+                row.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _projects[availableProjects[i]].Title;
+                row.GetComponent<AssignTheProjectIndexToTheStartButton>().projectManager = this;
+                //  button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[player].job.ToString(); //Changing text
+                //  button.GetComponent<CharacterIndexHolder>().characterIndex = player;
+            }
+        }
+    }
+
+    public void RemoveRows()
+    {
+        // remove all current project rows
+        foreach (Transform child in _panelForProjects.transform)
         {
             Destroy(child.gameObject);
         }
