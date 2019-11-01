@@ -6,7 +6,6 @@ using UnityEngine;
 public static class Income
 {
     public static event EventHandler OnIncomeAmountChanged;
-
     private static float incomeAmount;
 
     public static void addIncomeAmount(float amount)
@@ -19,5 +18,12 @@ public static class Income
     public static float GetIncomeAmount()
     {
         return incomeAmount;
+    }
+
+    public static void payIncomeAmount(float amount)
+    {
+        incomeAmount -= amount;
+        if (OnIncomeAmountChanged != null)
+            OnIncomeAmountChanged(null, EventArgs.Empty);
     }
 }
