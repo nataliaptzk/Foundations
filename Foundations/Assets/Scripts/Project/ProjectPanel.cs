@@ -61,18 +61,17 @@ public class ProjectPanel : MonoBehaviour
             _playerManager.players[person].avaliableForWork = true;
         }
 
+        projectManager._gridGenerator.grid_list[projectManager._projects[projectIndex].assignedRoom.x][projectManager._projects[projectIndex].assignedRoom.y].GetComponent<GridObject>().isAvailable =
+            true;
         projectManager.FindAvailableProjects();
         Destroy(gameObject);
-        // TODO remove the coordinates from the project
     }
 
     //TODO start the project when all character slots are filled in
     private void StartProject()
     {
     }
-    
-    
-    
+
     public void CreateButtons(List<int> availablePlayers)
     {
         RemoveButtons();

@@ -11,7 +11,7 @@ public class ProjectManager : MonoBehaviour
 {
     public List<ProjectClass> _projects = new List<ProjectClass>();
 
-    [SerializeField] private GridGenerator _gridGenerator;
+    public GridGenerator _gridGenerator;
     public PlayerManager _playerManager;
 
     [SerializeField] private GameObject _rowPrefab;
@@ -19,7 +19,7 @@ public class ProjectManager : MonoBehaviour
 
     [SerializeField] private GameObject _projectPanel;
 
-   // public GameObject MainPanel => _mainPanel;
+    // public GameObject MainPanel => _mainPanel;
 
     private void Start()
     {
@@ -65,11 +65,11 @@ public class ProjectManager : MonoBehaviour
         }
 
         List<int> availableProjectsIndexes = new List<int>();
-        foreach (var t in availableRoomsCoordinates)
+        foreach (var coordinate in availableRoomsCoordinates)
         {
             for (int j = 0; j < _projects.Count; j++)
             {
-                if (_projects[j].RoomRequirement == _gridGenerator.grid_list[t.x][t.y].GetComponent<GridObject>().type && !_projects[j].inProgress)
+                if (_projects[j].RoomRequirement == _gridGenerator.grid_list[coordinate.x][coordinate.y].GetComponent<GridObject>().type && !_projects[j].inProgress)
                 {
                     if (!availableProjectsIndexes.Contains(j))
                     {
@@ -82,21 +82,16 @@ public class ProjectManager : MonoBehaviour
         DisplayAvailableProjects(availableProjectsIndexes);
     }
 
-   private void DisplayAvailableProjects(List<int> availableProjectsIndexes)
+    private void DisplayAvailableProjects(List<int> availableProjectsIndexes)
     {
         CreateProjectRows(availableProjectsIndexes);
     }
 
-    public void AssignRoom()
-    {
-        // TODO pick a random room and assign it to the project
-    }
- 
+
     private void ProjectProgress()
     {
         // TODO add timer here
     }
-
 
 
     // TODO change parameter
@@ -114,28 +109,20 @@ public class ProjectManager : MonoBehaviour
         // TODO will call the function to add the income
     }
 
-   
-
 
     public void CreateProjectRows(List<int> availableProjects)
     {
         RemoveRows();
 
-        // foreach (var project in availableProjects)
+        foreach (var project in availableProjects)
         {
-            for (int i = 0; i < availableProjects.Count; i++)
-            {
-                GameObject row = Instantiate(_rowPrefab, _panelForProjects.transform, true);
-                row.transform.localScale = new Vector3(1f, 1f, 1f);
-                row.transform.localPosition = new Vector3(1f, 1f, 1f);
-                row.GetComponent<ProjectIndexHolder>().projectIndexHolder = availableProjects[i];
-                row.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _projects[availableProjects[i]].Title;
-                row.GetComponent<AssignTheProjectIndexToTheStartButton>().projectManager = this;
-                row.GetComponent<AssignTheProjectIndexToTheStartButton>()._projectPanelParent = _projectPanel;
-
-                //  button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[player].job.ToString(); //Changing text
-                //  button.GetComponent<CharacterIndexHolder>().characterIndex = player;
-            }
+            GameObject row = Instantiate(_rowPrefab, _panelForProjects.transform, true);
+            row.transform.localScale = new Vector3(1f, 1f, 1f);
+            row.transform.localPosition = new Vector3(1f, 1f, 1f);
+            row.GetComponent<ProjectIndexHolder>().projectIndexHolder = project;
+            row.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _projects[project].Title;
+            row.GetComponent<AssignTheProjectIndexToTheStartButton>().projectManager = this;
+            row.GetComponent<AssignTheProjectIndexToTheStartButton>()._projectPanelParent = _projectPanel;
         }
     }
 
