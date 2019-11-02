@@ -27,9 +27,10 @@ public class GridObject : MonoBehaviour
     public GameObject grid_ui;
     public bool combined_left = false;
     public bool combined_right = false;
-    private string sprite_name;
-
     public bool isAvailable;
+    public List<GameObject> doors;
+
+    private string sprite_name;
 
     public void SetComponents()
     {
@@ -133,5 +134,17 @@ public class GridObject : MonoBehaviour
             combined_right = true;
         }
         sprite_renderer.sprite = sprite;
+    }
+
+    public void SetDoors(bool state, bool side)
+    {
+        if(side)
+        {
+            doors[0].SetActive(state);
+        }
+        else
+        {
+            doors[1].SetActive(state);
+        }
     }
 }

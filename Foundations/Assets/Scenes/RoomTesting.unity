@@ -712,8 +712,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active_touch_locations: []
-  size_lerp_time: 5
-  position_lerp_time: 5
+  size_lerp_time: 1
+  position_lerp_time: 1
   max_size: 20
   min_size: 10
   inactive_timer: 15

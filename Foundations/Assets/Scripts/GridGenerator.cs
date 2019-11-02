@@ -33,6 +33,7 @@ public class GridGenerator : MonoBehaviour
             {
                 CheckEmpty();
                 CheckDoubleRooms();
+                CheckDoors();
             }
             current_tick = 0.0f;
         }
@@ -140,6 +141,74 @@ public class GridGenerator : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void CheckDoors()
+    {
+        for (int y = 0; y < y_count; y++)
+        {
+            for (int x = 0; x < x_count; x++)
+            {
+                GridObject obj = grid_list[y][x].GetComponent<GridObject>();
+                if (obj.type == RoomType.empty || obj.type == RoomType.buildable)
+                {
+                    continue;
+                }
+
+                //first on left
+                if(x == 0)
+                {
+                    obj.SetDoors(true, true);
+                    CheckRightRoomDoors(y, x, obj);
+                    continue;
+                }
+                //first on right
+                if(x == x_count - 1)
+                {
+                    obj.SetDoors(true, false);
+                    CheckLeftRoomDoors(y, x, obj);
+                    continue;
+                }
+                //inbetween
+                CheckLeftRoomDoors(y, x, obj);
+                CheckRightRoomDoors(y, x, obj);
+            }
+        }
+    }
+
+    public void CheckLeftRoomDoors(int grid_y, int grid_x, GridObject obj)
+    {
+        if (CheckRoomIsBuilt(grid_y, grid_x - 1))
+        {
+            obj.SetDoors(false, true);
+        }
+        else
+        {
+            obj.SetDoors(true, true);
+        }
+    }
+
+    public void CheckRightRoomDoors(int grid_y, int grid_x, GridObject obj)
+    {
+        if (CheckRoomIsBuilt(grid_y, grid_x + 1))
+        {
+            obj.SetDoors(false, false);
+        }
+        else
+        {
+            obj.SetDoors(true, false);
+        }
+    }
+
+    public bool CheckRoomIsBuilt(int grid_y, int grid_x)
+    {
+        bool built = false;
+        GridObject checked_obj = grid_list[grid_y][grid_x].GetComponent<GridObject>();
+        if (checked_obj.type != RoomType.empty && checked_obj.type != RoomType.buildable)
+        {
+            built = true;
+        }
+        return built;
     }
 
     public void AddNewRoom(RoomType room_type, int grid_y, int grid_x)
