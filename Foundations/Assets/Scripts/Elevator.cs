@@ -28,7 +28,7 @@ public class Elevator : MonoBehaviour
     {
         if(other.gameObject.tag == "Player" && disableTimer <= 0)
         {
-            disableTimer = 2;
+            disableTimer = 4;
             StartCoroutine(Transfer());
         }
     }
@@ -36,7 +36,7 @@ public class Elevator : MonoBehaviour
     IEnumerator Transfer()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         Player.transform.position = new Vector2(Portal.transform.position.x, Portal.transform.position.y);
     }
 }

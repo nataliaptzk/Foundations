@@ -60,6 +60,7 @@ public class GridGenerator : MonoBehaviour
             }
             grid_list.Add(grid_row);
         }
+
         /*
         GameObject obj = grid_list[0][0];
         GridObject grid = obj.GetComponent<GridObject>();
@@ -67,7 +68,9 @@ public class GridGenerator : MonoBehaviour
         grid.SetRoomValues();
         built_rooms.Add(grid);
         */
+
         GameObject obj = grid_list[0][0];
+        obj.AddComponent<Elevator>();
         GridObject grid = obj.GetComponent<GridObject>();
         grid.type = RoomType.elevator;
         grid.SetRoomValues();
@@ -80,12 +83,14 @@ public class GridGenerator : MonoBehaviour
         built_rooms.Add(grid1);
 
         GameObject obj2 = grid_list[1][0];
+        obj2.AddComponent<Elevator>();
         GridObject grid2 = obj2.GetComponent<GridObject>();
         grid2.type = RoomType.elevator;
         grid2.SetRoomValues();
         built_rooms.Add(grid2);
 
         GameObject obj3 = grid_list[2][0];
+        obj3.AddComponent<Elevator>();
         GridObject grid3 = obj3.GetComponent<GridObject>();
         grid3.type = RoomType.elevator;
         grid3.SetRoomValues();
