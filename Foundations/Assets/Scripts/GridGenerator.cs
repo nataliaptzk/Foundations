@@ -7,7 +7,7 @@ public class GridGenerator : MonoBehaviour
 {
 
     public List<List<GameObject>> grid_list;
-    public List<GridObject> builtRooms;
+    public List<GridObject> built_rooms;
     public Button characterCreationButton;
     public float x_dist = 1.5f;
     public float y_dist = 1.5f;
@@ -65,7 +65,7 @@ public class GridGenerator : MonoBehaviour
         GridObject grid = obj.GetComponent<GridObject>();
         grid.type = RoomType.pc;
         grid.SetRoomValues();
-        builtRooms.Add(grid);
+        built_rooms.Add(grid);
     }
 
     public void CheckEmpty()
@@ -217,7 +217,7 @@ public class GridGenerator : MonoBehaviour
         GridObject grid = obj.GetComponent<GridObject>();
         grid.type = room_type;
         grid.SetRoomValues();
-        builtRooms.Add(grid);
+        built_rooms.Add(grid);
         CheckForAvaliableCharacterCreation();
     }
 
@@ -225,11 +225,11 @@ public class GridGenerator : MonoBehaviour
     public void CheckForAvaliableCharacterCreation()
     {
         int spareSpaces = 0;
-        for (int i = 0; i < builtRooms.Count; i++)
+        for (int i = 0; i < built_rooms.Count; i++)
         {
-            if (builtRooms[i].current_occupants != builtRooms[i].max_occupants)
+            if (built_rooms[i].current_occupants != built_rooms[i].max_occupants)
             {
-                for (int j = builtRooms[i].current_occupants; j < builtRooms[i].max_occupants; j++)
+                for (int j = built_rooms[i].current_occupants; j < built_rooms[i].max_occupants; j++)
                 {
                     spareSpaces++;
                 }

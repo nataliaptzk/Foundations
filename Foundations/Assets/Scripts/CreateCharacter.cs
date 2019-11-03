@@ -135,12 +135,12 @@ public class CreateCharacter : MonoBehaviour
 
     void FindAvaliableRoom()
     {
-        for(int i = 0; i < rooms.builtRooms.Count; i++)
+        for(int i = 0; i < rooms.built_rooms.Count; i++)
         {
-            if(rooms.builtRooms[i].current_occupants != rooms.builtRooms[i].max_occupants)
+            if(rooms.built_rooms[i].current_occupants != rooms.built_rooms[i].max_occupants)
             {
-                roomType = rooms.builtRooms[i].type.ToString();
-                rooms.builtRooms[i].current_occupants++;
+                roomType = rooms.built_rooms[i].type.ToString();
+                rooms.built_rooms[i].current_occupants++;
 
                 //Add player into screen here
                 // player pos rooms.builtRooms[i].transform.localPosition;
@@ -153,11 +153,11 @@ public class CreateCharacter : MonoBehaviour
     public void CheckForAvaliableCharacterCreation()
     {
         int spareSpaces = 0;
-        for (int i = 0; i < rooms.builtRooms.Count; i++)
+        for (int i = 0; i < rooms.built_rooms.Count; i++)
         {
-            if (rooms.builtRooms[i].current_occupants != rooms.builtRooms[i].max_occupants)
+            if (rooms.built_rooms[i].current_occupants != rooms.built_rooms[i].max_occupants)
             {
-                for(int j = rooms.builtRooms[i].current_occupants; j < rooms.builtRooms[i].max_occupants; j++ )
+                for(int j = rooms.built_rooms[i].current_occupants; j < rooms.built_rooms[i].max_occupants; j++ )
                 {
                     spareSpaces++;
                 }
