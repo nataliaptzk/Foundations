@@ -73,6 +73,12 @@ public class GridGenerator : MonoBehaviour
         grid.SetRoomValues();
         built_rooms.Add(grid);
 
+        GameObject obj1 = grid_list[0][1];
+        GridObject grid1 = obj1.GetComponent<GridObject>();
+        grid1.type = RoomType.pc;
+        grid1.SetRoomValues();
+        built_rooms.Add(grid1);
+
         GameObject obj2 = grid_list[1][0];
         GridObject grid2 = obj2.GetComponent<GridObject>();
         grid2.type = RoomType.elevator;
