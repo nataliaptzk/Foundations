@@ -29,6 +29,9 @@ public class GridObject : MonoBehaviour
     public bool combined_right = false;
     public bool isAvailable;
     public List<GameObject> doors;
+    public GameObject[] playerPos = new GameObject[5];
+    public GameObject player;
+
 
     private string sprite_name;
 
@@ -145,6 +148,25 @@ public class GridObject : MonoBehaviour
         else
         {
             doors[1].SetActive(state);
+        }
+    }
+
+   public void SetPlayer(string colour)
+    {
+        //find a free slot
+        for(int i = 0; i < playerPos.Length; i++)
+        {
+            if(playerPos[i].transform.childCount == 0)
+            {
+
+                GameObject instancePlayer = Instantiate(player, playerPos[i].transform,false);
+                instancePlayer.transform.localScale = new Vector3(1, 1, 1);
+                if (ColorUtility.TryParseHtmlString(colour, out Color newColour))
+                {
+                    instancePlayer.GetComponent<SpriteRenderer>().color = newColour;
+                }
+                break;
+            }
         }
     }
 }

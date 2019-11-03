@@ -142,6 +142,8 @@ public class CreateCharacter : MonoBehaviour
                 roomType = rooms.built_rooms[i].type.ToString();
                 rooms.built_rooms[i].current_occupants++;
 
+
+                rooms.built_rooms[i].SetPlayer(colours[currentIndex]);
                 //Add player into screen here
                 // player pos rooms.builtRooms[i].transform.localPosition;
                 break;
