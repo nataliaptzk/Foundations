@@ -12,7 +12,8 @@ public enum RoomType
     lounge,
     meeting,
     audio,
-    workshop
+    workshop,
+    elevator
 }
 
 public class GridObject : MonoBehaviour
@@ -115,6 +116,10 @@ public class GridObject : MonoBehaviour
             case RoomType.audio:
                 sprite = Resources.Load<Sprite>("Sprites/RoomSprites/audio");
                 sprite_name = "audio";
+                break;
+            case RoomType.elevator:
+                sprite = Resources.Load<Sprite>("Sprites/RoomSprites/elevator");
+                sprite_name = "elevator";
                 break;
         }
         return sprite;
