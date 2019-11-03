@@ -122,7 +122,7 @@ public class GridObject : MonoBehaviour
                 sprite_name = "elevator";
                 break;
         }
-        return sprite;
+        return (sprite);
     }
 
     public void SetCombinedRoom(bool side)

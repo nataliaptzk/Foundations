@@ -60,12 +60,30 @@ public class GridGenerator : MonoBehaviour
             }
             grid_list.Add(grid_row);
         }
-
+        /*
         GameObject obj = grid_list[0][0];
         GridObject grid = obj.GetComponent<GridObject>();
         grid.type = RoomType.pc;
         grid.SetRoomValues();
         built_rooms.Add(grid);
+        */
+        GameObject obj = grid_list[0][0];
+        GridObject grid = obj.GetComponent<GridObject>();
+        grid.type = RoomType.elevator;
+        grid.SetRoomValues();
+        built_rooms.Add(grid);
+
+        GameObject obj2 = grid_list[1][0];
+        GridObject grid2 = obj2.GetComponent<GridObject>();
+        grid2.type = RoomType.elevator;
+        grid2.SetRoomValues();
+        built_rooms.Add(grid2);
+
+        GameObject obj3 = grid_list[2][0];
+        GridObject grid3 = obj3.GetComponent<GridObject>();
+        grid3.type = RoomType.elevator;
+        grid3.SetRoomValues();
+        built_rooms.Add(grid3);
     }
 
     public void CheckEmpty()
