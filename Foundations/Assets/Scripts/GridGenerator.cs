@@ -111,14 +111,14 @@ public class GridGenerator : MonoBehaviour
                 {
                     CheckIfBuildable(y, x, y, x + 1);
                 }
-                if(y > 0)
-                {
-                    CheckIfBuildable(y, x, y - 1, x);
-                }
-                if(y < (y_count - 1))
-                {
-                    CheckIfBuildable(y, x, y + 1, x);
-                }
+                //if(y > 0)
+                //{
+                //    CheckIfBuildable(y, x, y - 1, x);
+                //}
+                //if(y < (y_count - 1))
+                //{
+                //    CheckIfBuildable(y, x, y + 1, x);
+                //}
             }
         }
 
