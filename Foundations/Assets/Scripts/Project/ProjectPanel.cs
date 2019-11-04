@@ -11,7 +11,7 @@ public class ProjectPanel : MonoBehaviour
     private PlayerManager _playerManager;
     [SerializeField] private GameObject _panelForButtons;
     [SerializeField] private GameObject _buttonPrefab;
-    [SerializeField] private Sprite _playerSprite;
+    public Sprite playerSprite;
     public GameObject lastPressed;
 
     public List<GameObject> buttons = new List<GameObject>();
@@ -146,7 +146,7 @@ public class ProjectPanel : MonoBehaviour
             GameObject button = Instantiate(_buttonPrefab, _panelForButtons.transform, true);
             button.transform.localScale = new Vector3(1f, 1f, 1f);
 
-            button.GetComponent<Image>().sprite = _playerSprite;
+            button.GetComponent<Image>().sprite = playerSprite;
             ColorUtility.TryParseHtmlString(_playerManager.players[player].colour, out var newColour);
             button.GetComponent<Image>().color = newColour;
 
