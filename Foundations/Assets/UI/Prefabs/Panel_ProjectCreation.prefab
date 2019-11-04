@@ -1358,6 +1358,9 @@ MonoBehaviour:
   _panelForButtons: {fileID: 1552091877404444363}
   _buttonPrefab: {fileID: 2457159974832491598, guid: 554b934619b80d147896836f4b6a21b6,
     type: 3}
+  _inProgressSliderPrefab: {fileID: 2332662883132804115, guid: f66d03a855ac54c4c965118f542bc24a,
+    type: 3}
+  _inProgressSliderSlot: {fileID: 0}
   playerSprite: {fileID: 21300000, guid: ce4a378a36375f949aadba82270926fa, type: 3}
   lastPressed: {fileID: 0}
   buttons: []

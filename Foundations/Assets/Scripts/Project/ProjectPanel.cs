@@ -11,6 +11,7 @@ public class ProjectPanel : MonoBehaviour
     private PlayerManager _playerManager;
     [SerializeField] private GameObject _panelForButtons;
     [SerializeField] private GameObject _buttonPrefab;
+    [SerializeField] private GameObject _inProgressSliderPrefab;
     public Sprite playerSprite;
     public GameObject lastPressed;
 
@@ -105,7 +106,9 @@ public class ProjectPanel : MonoBehaviour
 
     private IEnumerator StartProjectProgress(int indexProject)
     {
-        // not a nice way to close that window
+        projectManager.currentlyOpenWindow = null; // allow new projects to be open
+
+        // not a nice way to "close" that window
         int children = transform.childCount;
         for (int i = 0; i < children; ++i)
         {
@@ -114,12 +117,32 @@ public class ProjectPanel : MonoBehaviour
 
         gameObject.GetComponent<Image>().enabled = false;
 
-        yield return new WaitForSecondsRealtime(projectManager._projects[indexProject].Duration);
+        var inProgressWindow = AddProjectToInProgress(indexProject);
 
-        FinishProject(indexProject);
+        float duration = projectManager._projects[indexProject].Duration;
+
+        float normalizedTime = 0;
+        while (normalizedTime <= 1f)
+        {
+            normalizedTime += Time.deltaTime / duration;
+            inProgressWindow.transform.GetChild(1).GetComponent<Slider>().value = normalizedTime;
+            yield return null;
+        }
+
+        FinishProject(indexProject, inProgressWindow);
     }
 
-    private void FinishProject(int indexProject)
+    private GameObject AddProjectToInProgress(int projectIndex)
+    {
+        GameObject inProgress = Instantiate(_inProgressSliderPrefab, projectManager.InProgressPanel.transform, true);
+        inProgress.transform.localScale = new Vector3(1f, 1f, 1f);
+        inProgress.transform.localPosition = new Vector3(0f, 0f, 0f);
+
+        inProgress.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = projectManager._projects[projectIndex].Title;
+        return inProgress;
+    }
+
+    private void FinishProject(int indexProject, GameObject inProgressWindow)
     {
         projectManager._projects[indexProject].inProgress = false;
 
@@ -135,6 +158,7 @@ public class ProjectPanel : MonoBehaviour
 
         //todo income doesnt work
         Income.addIncomeAmount(projectManager._projects[indexProject].Income);
+        Destroy(inProgressWindow);
         Destroy(gameObject);
     }
 

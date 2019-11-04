@@ -17,6 +17,7 @@ public class ProjectClass
     public List<int> _currentPeople;
     public Vector2Int assignedRoom;
     public bool inProgress;
+    public bool isStarted;
 
     public ProjectClass(string title, int income, float duration, int peopleRequirement, RoomType roomRequirement, CreateCharacter.Jobs jobRequirement)
     {
@@ -28,6 +29,7 @@ public class ProjectClass
         _jobRequirement = jobRequirement;
 
         inProgress = false;
+        isStarted = false;
         _currentPeople = new List<int>();
     }
 
