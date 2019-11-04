@@ -23,12 +23,10 @@ public class AssignCharacterToTheProject : MonoBehaviour
 
         projectPanel.lastPressed.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[indexHolder.characterIndex].job.ToString();
         projectPanel.lastPressed.GetComponent<Button>().interactable = false;
-// add the character image here
 
         projectPanel.lastPressed.transform.GetChild(1).GetComponent<Image>().sprite = projectPanel.playerSprite;
         ColorUtility.TryParseHtmlString(_playerManager.players[indexHolder.characterIndex].colour, out var newColour);
         projectPanel.lastPressed.transform.GetChild(1).GetComponent<Image>().color = newColour;
-
 
         projectPanel.RemoveButtons();
     }

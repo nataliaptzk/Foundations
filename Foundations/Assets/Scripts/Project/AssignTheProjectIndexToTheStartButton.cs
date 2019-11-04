@@ -20,7 +20,6 @@ public class AssignTheProjectIndexToTheStartButton : MonoBehaviour
 
     private void AssignRoom(int projectIndex)
     {
-
         List<Vector2Int> roomIndexes = new List<Vector2Int>();
 
         for (int i = 0; i < projectManager._gridGenerator.grid_list.Count; i++)
