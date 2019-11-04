@@ -16,6 +16,7 @@ public class ProjectManager : MonoBehaviour
     [SerializeField] private GameObject _rowPrefab;
     [SerializeField] private GameObject _panelForProjects;
     [SerializeField] private GameObject _projectPanel;
+    public GameObject currentlyOpenWindow;
 
     private void Start()
     {

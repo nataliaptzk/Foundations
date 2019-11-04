@@ -1233,8 +1233,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1552091877925222197}
   m_HandleRect: {fileID: 1552091877925222186}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9837784
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1270,7 +1270,7 @@ RectTransform:
   m_GameObject: {fileID: 1552091876634771794}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 911258148083442593}
   - {fileID: 1552091877125174297}
@@ -1288,8 +1288,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -457}
-  m_SizeDelta: {x: 421.2, y: 377.3}
+  m_AnchoredPosition: {x: 0, y: -0.5}
+  m_SizeDelta: {x: 421.2, y: 378.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1552091876634771807
 CanvasRenderer:
@@ -2330,8 +2330,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1552091876576744473}
   m_HandleRect: {fileID: 1552091876576744478}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -14,6 +14,7 @@ public class ProjectPanel : MonoBehaviour
     public Sprite playerSprite;
     public GameObject lastPressed;
 
+
     public List<GameObject> buttons = new List<GameObject>();
 
     private void Start()
@@ -89,6 +90,7 @@ public class ProjectPanel : MonoBehaviour
         projectManager._gridGenerator.grid_list[projectManager._projects[projectIndex].assignedRoom.x][projectManager._projects[projectIndex].assignedRoom.y].GetComponent<GridObject>().isAvailable =
             true;
         projectManager.FindAvailableProjects();
+        projectManager.currentlyOpenWindow = null;
         Destroy(gameObject);
     }
 
