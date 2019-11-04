@@ -8,6 +8,7 @@ public class GridGenerator : MonoBehaviour
 
     public List<List<GameObject>> grid_list;
     public List<GridObject> built_rooms;
+    public PlayerManager playerManager;
     public Button characterCreationButton;
     public float x_dist = 1.5f;
     public float y_dist = 1.5f;
@@ -67,21 +68,21 @@ public class GridGenerator : MonoBehaviour
         GridObject grid = obj.GetComponent<GridObject>();
         grid.type = RoomType.elevator;
         grid.SetRoomValues();
-        built_rooms.Add(grid);
+       // built_rooms.Add(grid);
 
         GameObject obj1 = grid_list[1][0];
         obj1.AddComponent<Elevator>();
         GridObject grid1 = obj1.GetComponent<GridObject>();
         grid1.type = RoomType.elevator;
         grid1.SetRoomValues();
-        built_rooms.Add(grid1);
+      //  built_rooms.Add(grid1);
 
         GameObject obj2 = grid_list[2][0];
         obj2.AddComponent<Elevator>();
         GridObject grid2 = obj2.GetComponent<GridObject>();
         grid2.type = RoomType.elevator;
         grid2.SetRoomValues();
-        built_rooms.Add(grid2);
+      //  built_rooms.Add(grid2);
 
         GameObject obj3 = grid_list[0][1];
         GridObject grid3 = obj3.GetComponent<GridObject>();
@@ -247,10 +248,11 @@ public class GridGenerator : MonoBehaviour
         grid.SetRoomValues();
         built_rooms.Add(grid);
         CheckForAvaliableCharacterCreation();
+        playerManager.SetCharactersText();
     }
 
     //checks to see if theres enough space for a character to be created
-    public void CheckForAvaliableCharacterCreation()
+    public int CheckForAvaliableCharacterCreation()
     {
         int spareSpaces = 0;
         for (int i = 0; i < built_rooms.Count; i++)
@@ -274,5 +276,6 @@ public class GridGenerator : MonoBehaviour
         {
             characterCreationButton.interactable = true;
         }
+        return spareSpaces;
     }
 }
