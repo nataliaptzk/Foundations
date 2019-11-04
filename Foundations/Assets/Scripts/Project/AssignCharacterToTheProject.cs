@@ -16,7 +16,7 @@ public class AssignCharacterToTheProject : MonoBehaviour
         _playerManager = projectManager._playerManager;
     }
 
-    public void AssignCharacterToTheProjectBip(CharacterIndexHolder indexHolder)
+    public void AssignCharacterToTheProjectList(CharacterIndexHolder indexHolder)
     {
         projectManager._projects[projectPanel.GetComponent<ProjectIndexHolder>().projectIndexHolder]._currentPeople.Add(indexHolder.characterIndex);
         _playerManager.players[indexHolder.characterIndex].avaliableForWork = false;
