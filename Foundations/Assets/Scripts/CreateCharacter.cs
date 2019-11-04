@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CreateCharacter : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class CreateCharacter : MonoBehaviour
     int currentIndex = 0;
     [SerializeField]
     Jobs currentJob = 0;
-    public Dropdown jobDropdown;
+    public TMP_Dropdown jobDropdown;
     [SerializeField]
     List<Player> playerList;
 

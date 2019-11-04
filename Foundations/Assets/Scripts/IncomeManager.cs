@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class IncomeManager : MonoBehaviour
 {
     public float incomeInventoryAmount;
     public float incomeInventoryAmountPerSecond;
-    public Text money;
+    public TextMeshProUGUI money;
     public int paymentAmount;
 
     // Start is called before the first frame update
@@ -20,7 +21,7 @@ public class IncomeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        money.text = (int)incomeInventoryAmount + "";
+        money.text = "£ " + (int) incomeInventoryAmount + "";
         incomeInventoryAmount += incomeInventoryAmountPerSecond * Time.deltaTime;
         Income.addIncomeAmount(incomeInventoryAmount);
         //incomeInventoryAmount = 0f;
@@ -28,7 +29,8 @@ public class IncomeManager : MonoBehaviour
 
     public void Payment(int paymentAmount)
     {
-        if (incomeInventoryAmount > paymentAmount) {
+        if (incomeInventoryAmount > paymentAmount)
+        {
             incomeInventoryAmount = incomeInventoryAmount - paymentAmount;
             Income.payIncomeAmount(incomeInventoryAmount);
         }
