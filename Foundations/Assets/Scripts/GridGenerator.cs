@@ -61,13 +61,6 @@ public class GridGenerator : MonoBehaviour
             grid_list.Add(grid_row);
         }
 
-        /*
-        GameObject obj = grid_list[0][0];
-        GridObject grid = obj.GetComponent<GridObject>();
-        grid.type = RoomType.pc;
-        grid.SetRoomValues();
-        built_rooms.Add(grid);
-        */
 
         GameObject obj = grid_list[0][0];
         obj.AddComponent<Elevator>();
@@ -76,25 +69,31 @@ public class GridGenerator : MonoBehaviour
         grid.SetRoomValues();
         built_rooms.Add(grid);
 
-        GameObject obj1 = grid_list[0][1];
+        GameObject obj1 = grid_list[1][0];
+        obj1.AddComponent<Elevator>();
         GridObject grid1 = obj1.GetComponent<GridObject>();
-        grid1.type = RoomType.pc;
+        grid1.type = RoomType.elevator;
         grid1.SetRoomValues();
         built_rooms.Add(grid1);
 
-        GameObject obj2 = grid_list[1][0];
+        GameObject obj2 = grid_list[2][0];
         obj2.AddComponent<Elevator>();
         GridObject grid2 = obj2.GetComponent<GridObject>();
         grid2.type = RoomType.elevator;
         grid2.SetRoomValues();
         built_rooms.Add(grid2);
 
-        GameObject obj3 = grid_list[2][0];
-        obj3.AddComponent<Elevator>();
+        GameObject obj3 = grid_list[0][1];
         GridObject grid3 = obj3.GetComponent<GridObject>();
-        grid3.type = RoomType.elevator;
+        grid3.type = RoomType.pc;
         grid3.SetRoomValues();
         built_rooms.Add(grid3);
+
+        obj.GetComponent<Elevator>().AssignPortal(true, obj1);
+        obj1.GetComponent<Elevator>().AssignPortal(true, obj2);
+        obj1.GetComponent<Elevator>().AssignPortal(false, obj);
+        obj2.GetComponent<Elevator>().AssignPortal(false, obj1);
+        
     }
 
     public void CheckEmpty()

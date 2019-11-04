@@ -16,6 +16,8 @@ public class PersonMovement : MonoBehaviour
     private GridGenerator grid_generator;
     public bool set_start_values = false;
 
+    public bool transfering = false;
+    public bool transfer_direction = false;
 
     //call this when you add a new person to the scene
     public void SetStartValues()
@@ -92,11 +94,23 @@ public class PersonMovement : MonoBehaviour
             }
             else
             {
-                //use elevator to reach target floor
+                if(current_room.grid_y < current_target.grid_y)
+                {
+                    transfer_direction = true;
+                    transfering = true;
+                }
+                else if(current_room.grid_y > current_target.grid_y)
+                {
+                    transfer_direction = false;
+                    transfering = true;
+                }
+                else
+                {
+                    transfering = false;
+                }
                 return;
             }
         }
-
         transform.Translate(Vector3.right * direction_speed * Time.deltaTime);
     }
 }

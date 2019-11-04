@@ -6,7 +6,7 @@ public class Elevator : MonoBehaviour
 {
 
     public GameObject Portal;
-    public GameObject Player;
+    public GameObject Portal2;
     float disableTimer = 0; 
     
     // Start is called before the first frame update
@@ -29,14 +29,40 @@ public class Elevator : MonoBehaviour
         if(other.gameObject.tag == "Player" && disableTimer <= 0)
         {
             disableTimer = 4;
-            StartCoroutine(Transfer());
+            PersonMovement PM = other.gameObject.GetComponent<PersonMovement>();
+            if(PM.transfer_direction && PM.transfering)
+            {
+                TransferUP(other.gameObject);
+            }
+            else
+            {
+                TransferDown(other.gameObject);
+            }
         }
     }
 
-    IEnumerator Transfer()
+    IEnumerator TransferUP(GameObject player)
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
         yield return new WaitForSeconds(1);
-        Player.transform.position = new Vector2(Portal.transform.position.x, Portal.transform.position.y);
+        player.transform.position = new Vector2(Portal.transform.position.x, Portal.transform.position.y);
     }
+
+    IEnumerator TransferDown(GameObject player)
+    {
+        yield return new WaitForSeconds(1);
+        player.transform.position = new Vector2(Portal2.transform.position.x, Portal2.transform.position.y);
+    }
+
+    public void AssignPortal(bool up, GameObject obj)
+    {
+        if(up)
+        {
+            Portal = obj;
+        }
+        else
+        {
+            Portal2 = obj;
+        }
+    }
+
 }
