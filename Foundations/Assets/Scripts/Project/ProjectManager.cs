@@ -27,21 +27,21 @@ public class ProjectManager : MonoBehaviour
 
     private void CreateProjects()
     {
-        _projects.Add(new ProjectClass("NewProject.Begin();", 100, 15, 1, RoomType.pc, CreateCharacter.Jobs.programmer));
-        _projects.Add(new ProjectClass("Can't see sharp", 250, 25, 3, RoomType.pc, CreateCharacter.Jobs.programmer));
-        _projects.Add(new ProjectClass("Income++", 500, 50, 5, RoomType.pc, CreateCharacter.Jobs.gameDesigner));
-        _projects.Add(new ProjectClass("As green as grass", 100, 10, 1, RoomType.greenscreen, CreateCharacter.Jobs.actor));
-        _projects.Add(new ProjectClass("e", 250, 20, 3, RoomType.greenscreen, CreateCharacter.Jobs.producer));
-        _projects.Add(new ProjectClass("f", 500, 40, 5, RoomType.greenscreen, CreateCharacter.Jobs.producer));
+        _projects.Add(new ProjectClass("Code review", 100, 15, 1, RoomType.pc, CreateCharacter.Jobs.programmer));
+        _projects.Add(new ProjectClass("Implement new features", 250, 25, 3, RoomType.pc, CreateCharacter.Jobs.programmer));
+        _projects.Add(new ProjectClass("Design the serious game", 500, 50, 5, RoomType.pc, CreateCharacter.Jobs.gameDesigner));
+        _projects.Add(new ProjectClass("Interpret serious role", 100, 10, 1, RoomType.greenscreen, CreateCharacter.Jobs.actor));
+        _projects.Add(new ProjectClass("Manage creative components", 250, 20, 3, RoomType.greenscreen, CreateCharacter.Jobs.producer));
+        _projects.Add(new ProjectClass("Read and edit scripts", 500, 40, 5, RoomType.greenscreen, CreateCharacter.Jobs.producer));
         _projects.Add(new ProjectClass("Daily Stand Up", 100, 15, 1, RoomType.meeting, CreateCharacter.Jobs.manager));
-        _projects.Add(new ProjectClass("Yet another sprint review", 250, 25, 3, RoomType.meeting, CreateCharacter.Jobs.projectLeader));
-        _projects.Add(new ProjectClass("Retrospective time", 500, 35, 5, RoomType.meeting, CreateCharacter.Jobs.projectLeader));
-        _projects.Add(new ProjectClass("Turn up the volume", 100, 20, 1, RoomType.audio, CreateCharacter.Jobs.Musician));
+        _projects.Add(new ProjectClass("Sprint review", 250, 25, 3, RoomType.meeting, CreateCharacter.Jobs.projectLeader));
+        _projects.Add(new ProjectClass("Retrospective meeting", 500, 35, 5, RoomType.meeting, CreateCharacter.Jobs.projectLeader));
+        _projects.Add(new ProjectClass("Soundtrack Recording", 100, 20, 1, RoomType.audio, CreateCharacter.Jobs.Musician));
         _projects.Add(new ProjectClass("Noise Removal", 250, 25, 3, RoomType.audio, CreateCharacter.Jobs.Musician));
-        _projects.Add(new ProjectClass("Auto-Tune it", 500, 40, 5, RoomType.audio, CreateCharacter.Jobs.soundTechnician));
-        _projects.Add(new ProjectClass("m", 100, 30, 1, RoomType.workshop, CreateCharacter.Jobs.engineer));
-        _projects.Add(new ProjectClass("n", 250, 45, 3, RoomType.workshop, CreateCharacter.Jobs.engineer));
-        _projects.Add(new ProjectClass("o", 500, 60, 5, RoomType.workshop, CreateCharacter.Jobs.architect));
+        _projects.Add(new ProjectClass("Sound recording on set", 500, 40, 5, RoomType.audio, CreateCharacter.Jobs.soundTechnician));
+        _projects.Add(new ProjectClass("Research and development", 100, 30, 1, RoomType.workshop, CreateCharacter.Jobs.engineer));
+        _projects.Add(new ProjectClass("Solve complex problems", 250, 45, 3, RoomType.workshop, CreateCharacter.Jobs.engineer));
+        _projects.Add(new ProjectClass("Design proposal", 500, 60, 5, RoomType.workshop, CreateCharacter.Jobs.architect));
     }
 
     [ContextMenu("CheckAvailableProjects")]
