@@ -227,6 +227,10 @@ public class ProjectPanel : MonoBehaviour
                 textBox.gameObject.SetActive(true);
                 textBox.GetComponent<TextMeshProUGUI>().text = "Please assign all characters by clicking on the windows above.";
                 break;
+            case 5:
+                textBox.gameObject.SetActive(true);
+                textBox.GetComponent<TextMeshProUGUI>().text = "Click start to begin the project.";
+                break;
         }
     }
 

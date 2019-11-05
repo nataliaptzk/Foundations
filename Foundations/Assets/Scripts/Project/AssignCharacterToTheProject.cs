@@ -30,5 +30,11 @@ public class AssignCharacterToTheProject : MonoBehaviour
 
         projectPanel.RemoveButtons();
         projectPanel.DisplayHelpText(0);
+
+        if (projectManager._projects[projectPanel.GetComponent<ProjectIndexHolder>().projectIndexHolder]._currentPeople.Count ==
+            projectManager._projects[projectPanel.GetComponent<ProjectIndexHolder>().projectIndexHolder].PeopleRequirement)
+        {
+            projectPanel.DisplayHelpText(5);
+        }
     }
 }
