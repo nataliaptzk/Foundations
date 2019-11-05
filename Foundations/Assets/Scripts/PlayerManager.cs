@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Player
@@ -14,6 +15,8 @@ public class Player
 [System.Serializable]
 public class PlayerManager : MonoBehaviour
 {
+    public TMPro.TextMeshProUGUI numCharactersText;
+    public GridGenerator gridGen;
     public List<Player> players;
     // Start is called before the first frame update
     void Start()
@@ -34,5 +37,11 @@ public class PlayerManager : MonoBehaviour
         player.job = job;
         player.location = location;
         players.Add(player);
+        SetCharactersText();
+    }
+
+    public void SetCharactersText()
+    {
+        numCharactersText.text = players.Count + "/" + (gridGen.CheckForAvaliableCharacterCreation() + players.Count);
     }
 }
