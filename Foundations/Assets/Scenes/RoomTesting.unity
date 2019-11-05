@@ -3282,8 +3282,8 @@ MonoBehaviour:
   built_rooms: []
   playerManager: {fileID: 1784341687}
   characterCreationButton: {fileID: 1897694329}
-  x_dist: 6.3
-  y_dist: 6.3
+  x_dist: 6
+  y_dist: 6
   x_count: 10
   y_count: 3
   OP: {fileID: 813668301}
@@ -4408,8 +4408,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507941440}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.275, y: 4.5, z: 0}
-  m_LocalScale: {x: 93, y: 30, z: 1}
+  m_LocalPosition: {x: 27.013, y: 5.984, z: 0}
+  m_LocalScale: {x: 122.21027, y: 38.22001, z: 1}
   m_Children: []
   m_Father: {fileID: 813668303}
   m_RootOrder: 0

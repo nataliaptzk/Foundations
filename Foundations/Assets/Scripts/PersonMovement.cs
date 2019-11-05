@@ -22,6 +22,7 @@ public class PersonMovement : MonoBehaviour
     //call this when you add a new person to the scene
     public void SetStartValues()
     {
+        direction_speed = speed;
         grid_generator = GameObject.Find("GridGenerator").GetComponent<GridGenerator>();
         grid_list = grid_generator.grid_list;
         Invoke("SetRandomRoomTarget", 1.0F);
@@ -106,7 +107,7 @@ public class PersonMovement : MonoBehaviour
                 if(Vector2.Distance(transform.position, room_x) < 0.2f)
                 {
                     reached_target = true;
-                    Debug.Log("there");
+                    direction_speed = 0.0f;
                     Invoke("SetRandomRoomTarget", 3.0f);
                     return;
                 }

@@ -38,13 +38,13 @@ public class ChatBehaviour : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            bool randomchance = (Random.value > 0.5f);
+            bool randomchance = (Random.value > 0.7f);
 
             if(randomchance && startTimer!= true)
             {
                 speechBubble.SetActive(true);
 
-                int randomnumber = Random.Range(0, 3);
+                int randomnumber = Random.Range(0, 4);
                 iconSprite.sprite = icons[randomnumber];
                 startTimer = true;
 

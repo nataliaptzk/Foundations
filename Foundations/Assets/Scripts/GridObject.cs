@@ -165,7 +165,7 @@ public class GridObject : MonoBehaviour
             {
 
                 GameObject instancePlayer = Instantiate(player, playerPos[i].transform,false);
-                instancePlayer.transform.localScale = new Vector3(1, 1, 1);
+                instancePlayer.transform.localScale = new Vector3(1.25f, 2, 1);
                 if (ColorUtility.TryParseHtmlString(colour, out Color newColour))
                 {
                     instancePlayer.GetComponent<SpriteRenderer>().color = newColour;
