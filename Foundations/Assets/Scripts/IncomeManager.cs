@@ -6,7 +6,7 @@ using TMPro;
 
 public class IncomeManager : MonoBehaviour
 {
-    public float incomeInventoryAmount;
+    public static float incomeInventoryAmount;
     public float incomeInventoryAmountPerSecond;
     public TextMeshProUGUI money;
     public int paymentAmount;
@@ -14,7 +14,7 @@ public class IncomeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        incomeInventoryAmount = 0f;
+        incomeInventoryAmount = 300f;
         incomeInventoryAmountPerSecond = 1.0f;
     }
 
@@ -27,7 +27,7 @@ public class IncomeManager : MonoBehaviour
         //incomeInventoryAmount = 0f;
     }
 
-    public void Payment(int paymentAmount)
+    public static void Payment(int paymentAmount)
     {
         if (incomeInventoryAmount > paymentAmount)
         {
@@ -38,5 +38,11 @@ public class IncomeManager : MonoBehaviour
         {
             Debug.Log("Not enough money!");
         }
+    }
+
+    //I know its not ideal but apparently buttons hate static functions
+    public void PaymentWrapper(int paymentAmount)
+    {
+        Payment(paymentAmount);
     }
 }
