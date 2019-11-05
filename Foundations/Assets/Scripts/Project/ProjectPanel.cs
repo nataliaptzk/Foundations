@@ -155,7 +155,6 @@ public class ProjectPanel : MonoBehaviour
             true;
         projectManager.FindAvailableProjects();
 
-        //todo income doesnt work
         IncomeManager.Payment(projectManager._projects[indexProject].Income);
         Destroy(inProgressWindow);
         Destroy(gameObject);

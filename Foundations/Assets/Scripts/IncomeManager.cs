@@ -39,4 +39,10 @@ public class IncomeManager : MonoBehaviour
             Debug.Log("Not enough money!");
         }
     }
+
+    //I know its not ideal but apparently buttons hate static functions
+    public void PaymentWrapper(int paymentAmount)
+    {
+        Payment(paymentAmount);
+    }
 }
