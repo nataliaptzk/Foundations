@@ -242,13 +242,17 @@ public class GridGenerator : MonoBehaviour
 
     public void AddNewRoom(RoomType room_type, int grid_y, int grid_x)
     {
-        GameObject obj = grid_list[grid_y][grid_x];
-        GridObject grid = obj.GetComponent<GridObject>();
-        grid.type = room_type;
-        grid.SetRoomValues();
-        built_rooms.Add(grid);
-        CheckForAvaliableCharacterCreation();
-        playerManager.SetCharactersText();
+       if (IncomeManager.incomeInventoryAmount > 100)
+       {
+            IncomeManager.Payment(100);
+            GameObject obj = grid_list[grid_y][grid_x];
+            GridObject grid = obj.GetComponent<GridObject>();
+            grid.type = room_type;
+            grid.SetRoomValues();
+            built_rooms.Add(grid);
+            CheckForAvaliableCharacterCreation();
+            playerManager.SetCharactersText();
+        }
     }
 
     //checks to see if theres enough space for a character to be created

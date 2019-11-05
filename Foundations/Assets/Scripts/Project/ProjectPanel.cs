@@ -128,7 +128,6 @@ public class ProjectPanel : MonoBehaviour
             inProgressWindow.transform.GetChild(1).GetComponent<Slider>().value = normalizedTime;
             yield return null;
         }
-
         FinishProject(indexProject, inProgressWindow);
     }
 
@@ -157,7 +156,7 @@ public class ProjectPanel : MonoBehaviour
         projectManager.FindAvailableProjects();
 
         //todo income doesnt work
-        Income.addIncomeAmount(projectManager._projects[indexProject].Income);
+        IncomeManager.Payment(projectManager._projects[indexProject].Income);
         Destroy(inProgressWindow);
         Destroy(gameObject);
     }
