@@ -30,7 +30,7 @@ public class Elevator : MonoBehaviour
         {
             disableTimer = 4;
             PersonMovement PM = other.gameObject.GetComponent<PersonMovement>();
-            if(PM.transfer_direction && PM.transfering)
+            if(!PM.transfer_direction && PM.transfering)
             {
                 TransferUP(other.gameObject);
             }

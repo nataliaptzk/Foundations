@@ -167,7 +167,7 @@ public class CreateCharacter : MonoBehaviour
             }
         }
 
-        Debug.Log("spare Spaces" + spareSpaces);
+        //Debug.Log("spare Spaces" + spareSpaces);
 
         if(spareSpaces == 0)
         {

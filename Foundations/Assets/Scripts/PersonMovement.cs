@@ -15,7 +15,7 @@ public class PersonMovement : MonoBehaviour
     private float current_tick = 0.0f;
     private GridGenerator grid_generator;
     private bool set_start_values = true;
-
+    private float direction_speed = 0.0f;
     public bool transfering = false;
     public bool transfer_direction = false;
 
@@ -24,7 +24,7 @@ public class PersonMovement : MonoBehaviour
     {
         grid_generator = GameObject.Find("GridGenerator").GetComponent<GridGenerator>();
         grid_list = grid_generator.grid_list;
-        SetRandomRoomTarget();
+        Invoke("SetRandomRoomTarget", 1.0F);
         SetCurrentTarget();
     }
 
@@ -73,13 +73,22 @@ public class PersonMovement : MonoBehaviour
     public void SetRandomRoomTarget()
     {
         int rand_num = Random.Range(0, grid_generator.built_rooms.Count - 1);
-        end_target = grid_generator.built_rooms[rand_num];
-        Debug.Log(rand_num);
+        if (current_room)
+        {
+            if (current_room.grid_y == grid_generator.built_rooms[rand_num].grid_y)
+            {
+                end_target = grid_generator.built_rooms[rand_num];
+                reached_target = false;
+            }
+            else
+            {
+                SetRandomRoomTarget();
+            }
+        }
     }
 
     public void MovePerson()
     {
-        float direction_speed = 0.0f;
         if(current_room.grid_x < current_target.grid_x)
         {
             direction_speed = speed;
@@ -93,8 +102,14 @@ public class PersonMovement : MonoBehaviour
             //reached current target, add them to this room/however they are used for projects
             if(current_room == end_target)
             {
-                reached_target = true;
-                return;
+                Vector2 room_x = new Vector2(end_target.gameObject.transform.position.x, transform.position.y);
+                if(Vector2.Distance(transform.position, room_x) < 0.2f)
+                {
+                    reached_target = true;
+                    Debug.Log("there");
+                    Invoke("SetRandomRoomTarget", 3.0f);
+                    return;
+                }
             }
             else
             {
