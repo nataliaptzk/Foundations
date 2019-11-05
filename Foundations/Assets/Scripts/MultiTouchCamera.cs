@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MultiTouchCamera : MonoBehaviour
 {
@@ -68,25 +69,28 @@ public class MultiTouchCamera : MonoBehaviour
     {
         for (int i = 0; i < Input.touchCount; i++)
         {
-            Vector3 touch_location = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
-            touch_location.z = -10;
-            bool valid_touch = true;
-            for (int j = 0; j < active_touch_locations.Count; j++)
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                Vector3 existing_location = active_touch_locations[j].transform.position;
-                existing_location.z = -10;
-
-                // checks if new touch is far enough away from existing ones
-                if (Vector3.Distance(touch_location, existing_location) < 10.0f)
+                Vector3 touch_location = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
+                touch_location.z = -10;
+                bool valid_touch = true;
+                for (int j = 0; j < active_touch_locations.Count; j++)
                 {
-                    active_touch_locations[j].GetComponent<CameraTouchObject>().current_timer = 0.0f;
-                    valid_touch = false;
+                    Vector3 existing_location = active_touch_locations[j].transform.position;
+                    existing_location.z = -10;
+
+                    // checks if new touch is far enough away from existing ones
+                    if (Vector3.Distance(touch_location, existing_location) < 10.0f)
+                    {
+                        active_touch_locations[j].GetComponent<CameraTouchObject>().current_timer = 0.0f;
+                        valid_touch = false;
+                    }
                 }
-            }
-            if (active_touch_locations.Count < 1 || valid_touch)
-            {
-                AddTouchLocation(touch_location);
-                SetLerpStartValues();
+                if (active_touch_locations.Count < 1 || valid_touch)
+                {
+                    AddTouchLocation(touch_location);
+                    SetLerpStartValues();
+                }
             }
 
         }
@@ -96,25 +100,28 @@ public class MultiTouchCamera : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Vector3 mouse_location = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mouse_location.z = -10;
-                bool valid_touch = true;
-                for (int j = 0; j < active_touch_locations.Count; j++)
+                if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    Vector3 existing_location = active_touch_locations[j].transform.position;
-                    existing_location.z = -10;
-
-                    // checks if new touch is far enough away from existing ones to be valid
-                    if (Vector3.Distance(mouse_location, existing_location) < 10.0f)
+                    Vector3 mouse_location = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    mouse_location.z = -10;
+                    bool valid_touch = true;
+                    for (int j = 0; j < active_touch_locations.Count; j++)
                     {
-                        active_touch_locations[j].GetComponent<CameraTouchObject>().current_timer = 0.0f;
-                        valid_touch = false;
+                        Vector3 existing_location = active_touch_locations[j].transform.position;
+                        existing_location.z = -10;
+
+                        // checks if new touch is far enough away from existing ones to be valid
+                        if (Vector3.Distance(mouse_location, existing_location) < 10.0f)
+                        {
+                            active_touch_locations[j].GetComponent<CameraTouchObject>().current_timer = 0.0f;
+                            valid_touch = false;
+                        }
                     }
-                }
-                if (active_touch_locations.Count < 1 || valid_touch)
-                {
-                    AddTouchLocation(mouse_location);
-                    SetLerpStartValues();
+                    if (active_touch_locations.Count < 1 || valid_touch)
+                    {
+                        AddTouchLocation(mouse_location);
+                        SetLerpStartValues();
+                    }
                 }
             }
         }
