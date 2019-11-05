@@ -14,7 +14,7 @@ public class PersonMovement : MonoBehaviour
     public float tick_rate = 0.5f;
     private float current_tick = 0.0f;
     private GridGenerator grid_generator;
-    public bool set_start_values = false;
+    private bool set_start_values = true;
 
     public bool transfering = false;
     public bool transfer_direction = false;
@@ -24,7 +24,7 @@ public class PersonMovement : MonoBehaviour
     {
         grid_generator = GameObject.Find("GridGenerator").GetComponent<GridGenerator>();
         grid_list = grid_generator.grid_list;
-        current_room = grid_list[0][0].GetComponent<GridObject>();
+        SetRandomRoomTarget();
         SetCurrentTarget();
     }
 
@@ -35,7 +35,7 @@ public class PersonMovement : MonoBehaviour
             SetStartValues();
             set_start_values = false;
         }
-
+        SetCurrentTarget();
         if(!reached_target && current_target)
         {
             if(current_room)
@@ -47,18 +47,21 @@ public class PersonMovement : MonoBehaviour
 
     public void SetCurrentTarget()
     {
-        if(current_room.grid_y != end_target.grid_y)
+        if (current_room && end_target)
         {
-            //if person isn't on same floor as end target, go to elevator
-            current_target = grid_list[current_room.grid_y][0].GetComponent<GridObject>();
-        }
-        else
-        {
-            current_target = end_target;
+            if (current_room.grid_y != end_target.grid_y)
+            {
+                //if person isn't on same floor as end target, go to elevator
+                current_target = grid_list[current_room.grid_y][0].GetComponent<GridObject>();
+            }
+            else
+            {
+                current_target = end_target;
+            }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if(other.GetComponent<GridObject>())
         {
@@ -71,6 +74,7 @@ public class PersonMovement : MonoBehaviour
     {
         int rand_num = Random.Range(0, grid_generator.built_rooms.Count - 1);
         end_target = grid_generator.built_rooms[rand_num];
+        Debug.Log(rand_num);
     }
 
     public void MovePerson()

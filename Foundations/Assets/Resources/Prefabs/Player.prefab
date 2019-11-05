@@ -253,7 +253,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8553707526928084441}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de554799f24498048b99e7897b5afed3, type: 3}
   m_Name: 
@@ -265,7 +265,8 @@ MonoBehaviour:
   reached_target: 0
   using_elevator: 0
   tick_rate: 0.5
-  set_start_values: 0
+  transfering: 0
+  transfer_direction: 0
 --- !u!50 &850699514912803414
 Rigidbody2D:
   serializedVersion: 4
