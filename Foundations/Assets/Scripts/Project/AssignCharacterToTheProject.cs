@@ -29,5 +29,6 @@ public class AssignCharacterToTheProject : MonoBehaviour
         projectPanel.lastPressed.transform.GetChild(1).GetComponent<Image>().color = newColour;
 
         projectPanel.RemoveButtons();
+        projectPanel.DisplayHelpText(0);
     }
 }

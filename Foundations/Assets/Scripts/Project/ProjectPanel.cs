@@ -33,6 +33,7 @@ public class ProjectPanel : MonoBehaviour
         }
 
         DisplayButtons();
+        DisplayHelpText(0);
     }
 
     private void DisplayButtons()
@@ -45,6 +46,7 @@ public class ProjectPanel : MonoBehaviour
 
     public void DisplayAvailableCharactersRequired(ProjectIndexHolder indexProject)
     {
+        DisplayHelpText(3);
         List<int> availablePlayersIndexes = new List<int>();
         for (int i = 0; i < _playerManager.players.Count; i++)
         {
@@ -54,12 +56,19 @@ public class ProjectPanel : MonoBehaviour
             }
         }
 
+        if (availablePlayersIndexes.Count == 0)
+        {
+            DisplayHelpText(1);
+        }
+
         CreateButtons(availablePlayersIndexes);
     }
 
 
     public void DisplayAvailableCharactersGeneral()
     {
+        DisplayHelpText(3);
+
         List<int> availablePlayersIndexes = new List<int>();
         for (int i = 0; i < _playerManager.players.Count; i++)
         {
@@ -67,6 +76,11 @@ public class ProjectPanel : MonoBehaviour
             {
                 availablePlayersIndexes.Add(i);
             }
+        }
+
+        if (availablePlayersIndexes.Count == 0)
+        {
+            DisplayHelpText(2);
         }
 
         CreateButtons(availablePlayersIndexes);
@@ -101,6 +115,10 @@ public class ProjectPanel : MonoBehaviour
             projectManager._projects[GetComponent<ProjectIndexHolder>().projectIndexHolder].PeopleRequirement)
         {
             StartCoroutine(StartProjectProgress(GetComponent<ProjectIndexHolder>().projectIndexHolder));
+        }
+        else
+        {
+            DisplayHelpText(4);
         }
     }
 
@@ -180,6 +198,37 @@ public class ProjectPanel : MonoBehaviour
             button.GetComponent<AssignCharacterToTheProject>().projectPanel = this;
             button.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _playerManager.players[player].job.ToString(); //Changing text
             button.GetComponent<CharacterIndexHolder>().characterIndex = player;
+        }
+    }
+
+    public void DisplayHelpText(int messageIndex)
+    {
+        var childCount = gameObject.transform.childCount;
+        var textBox = gameObject.transform.GetChild(childCount - 1);
+
+        switch (messageIndex)
+        {
+            case 0:
+                textBox.gameObject.SetActive(true);
+                textBox.GetComponent<TextMeshProUGUI>().text =
+                    "Click on the icons above to display available characters and choose one to assign to the project. Once all characters are assigned you can start the project.";
+                break;
+            case 1:
+                textBox.gameObject.SetActive(true);
+                textBox.GetComponent<TextMeshProUGUI>().text = "There are no characters available for the current requirement.";
+                break;
+            case 2:
+                textBox.gameObject.SetActive(true);
+                textBox.GetComponent<TextMeshProUGUI>().text = "Not enough characters available, please create more characters.";
+                break;
+            case 3:
+                textBox.gameObject.SetActive(false);
+                textBox.GetComponent<TextMeshProUGUI>().text = "";
+                break;
+            case 4:
+                textBox.gameObject.SetActive(true);
+                textBox.GetComponent<TextMeshProUGUI>().text = "Please assign all characters by clicking on the windows above.";
+                break;
         }
     }
 
