@@ -16,6 +16,7 @@ public class ProjectManager : MonoBehaviour
     [SerializeField] private GameObject _panelForProjects;
     [SerializeField] private GameObject _projectPanel;
     [SerializeField] private GameObject _inProgressPanel;
+    [SerializeField] private GameObject _helpBoxText;
     public GameObject currentlyOpenWindow;
 
     public GameObject InProgressPanel => _inProgressPanel;
@@ -76,6 +77,18 @@ public class ProjectManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+
+        if (availableProjectsIndexes.Count == 0)
+        {
+            _helpBoxText.gameObject.SetActive(true);
+            _helpBoxText.GetComponent<TextMeshProUGUI>().text = "There are no rooms available to start a project. Build a room or wait until the projects in progress finish.";
+        }
+        else
+        {
+            _helpBoxText.gameObject.SetActive(false);
+            _helpBoxText.GetComponent<TextMeshProUGUI>().text = "";
         }
 
         DisplayAvailableProjects(availableProjectsIndexes);
